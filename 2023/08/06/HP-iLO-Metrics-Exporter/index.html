@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>HP iLO Metrics Exporter | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="HP iLO Metrics Exporter因為我自己的環境有HP ILO3 至 ILO5，而ILO3沒有 AlertMail 的功能 所以我覺得如果可以透過 Grafana Alerting 來通知我是否異常，這樣更聰明些，所以我做了一點小調整。 原本的套件還是使用Python2.7，我的系統又因為其他套件使用了Python3 所以也一併調整成Python3的語法了。 同時，Grafana的d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HP iLO Metrics Exporter">
+<meta property="og:url" content="http://example.com/2023/08/06/HP-iLO-Metrics-Exporter/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="HP iLO Metrics Exporter因為我自己的環境有HP ILO3 至 ILO5，而ILO3沒有 AlertMail 的功能 所以我覺得如果可以透過 Grafana Alerting 來通知我是否異常，這樣更聰明些，所以我做了一點小調整。 原本的套件還是使用Python2.7，我的系統又因為其他套件使用了Python3 所以也一併調整成Python3的語法了。 同時，Grafana的d">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://example.com/2023/08/06/HP-iLO-Metrics-Exporter/covers/NA_background_sky_4.jpg">
+<meta property="article:published_time" content="2023-08-05T17:35:27.000Z">
+<meta property="article:modified_time" content="2023-08-07T14:14:35.579Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="Prometheus">
+<meta property="article:tag" content="Grafana">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/08/06/HP-iLO-Metrics-Exporter/covers/NA_background_sky_4.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Luca Yao's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/a-german-shepherd-dog-in-a-fancy-suit-doing-taxes-in-a-city-downtown-while-overlooking-an-ocean--163146324.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/luca.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Prometheus/" rel="tag">Prometheus</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">3 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <li>
+            <a href="/2023/08/06/HP-iLO-Metrics-Exporter/">HP iLO Metrics Exporter</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/05/windows-Royal-TS-%E9%81%A0%E7%AB%AF%E9%9A%9C%E7%A4%99/">Windows Royal TS 遠端障礙</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/01/Markdown-Style-Memo/">Markdown Style Memo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-HP-iLO-Metrics-Exporter" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_cll0yfh700001lkv4fhnz82on">
+        <img src="/covers/NA_background_sky_4.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        HP iLO Metrics Exporter
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-08-05T17:35:27.000Z" itemprop="datePublished">2023-08-06</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分類 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            532 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Prometheus/" rel="tag">Prometheus</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="HP-iLO-Metrics-Exporter"><a href="#HP-iLO-Metrics-Exporter" class="headerlink" title="HP iLO Metrics Exporter"></a>HP iLO Metrics Exporter</h1><p>因為我自己的環境有HP <strong>ILO3</strong> 至 <strong>ILO5</strong>，而<strong>ILO3</strong>沒有 <code>AlertMail</code> 的功能</p>
+<p>所以我覺得如果可以透過 <code>Grafana Alerting</code> 來通知我是否異常，這樣更聰明些，所以我做了一點小調整。</p>
+<p>原本的套件還是使用<code>Python2.7</code>，我的系統又因為其他套件使用了<code>Python3</code></p>
+<p>所以也一併調整成Python3的語法了。</p>
+<p>同時，Grafana的dashboard我也調整過了，沒意外的話應該套用就可以使用了 d(&#96;･∀･)b</p>
+<p>我的Github連結：<a target="_blank" rel="noopener" href="https://github.com/luca-yao/hpilo-exporter">https://github.com/luca-yao/hpilo-exporter</a></p>
+<h3 id="Gauges"><a href="#Gauges" class="headerlink" title="Gauges"></a>Gauges</h3><p>Here are the status code of gauge</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 - OK</span><br><span class="line">1 - Degraded</span><br><span class="line">2 - Dead (Other)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Output-example"><a href="#Output-example" class="headerlink" title="Output example"></a>Output example</h3><p>Example of status of your iLO</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">health_at_a_glance:</span><br><span class="line">  battery: &#123;status: OK&#125;</span><br><span class="line">  bios_hardware: &#123;status: OK&#125;</span><br><span class="line">  fans: &#123;redundancy: Redundant, status: OK&#125;</span><br><span class="line">  memory: &#123;status: OK&#125;</span><br><span class="line">  network: &#123;status: Link Down&#125;,</span><br><span class="line">  power_supplies: &#123;redundancy: Redundant, status: OK&#125;</span><br><span class="line">  processor: &#123;status: OK&#125;</span><br><span class="line">  storage: &#123;status: Degraded&#125;</span><br><span class="line">  temperature: &#123;status: OK&#125;</span><br><span class="line">  vrm: &#123;status: Ok&#125;</span><br><span class="line">  drive: &#123;status: Ok&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The returned output would be:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hpilo_battery&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_storage&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 1.0</span><br><span class="line">hpilo_fans&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_bios_hardware&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_memory&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_power_supplies&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_processor&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_network&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 2.0</span><br><span class="line">hpilo_temperature&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_vrm&#123;product_name=&quot;ProLiant DL380 Gen6&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_drive&#123;product_name=&quot;ProLiant DL380 Gen6&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 0.0</span><br><span class="line">hpilo_firmware_version&#123;product_name=&quot;ProLiant DL360 Gen9&quot;,server_name=&quot;name.fqdn.domain&quot;&#125; 2.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="Installing"><a href="#Installing" class="headerlink" title="Installing"></a>Installing</h3><p>You can install exporter on the server directly or on separate machine.<br>To run, you must have <code>Python</code> and <code>pip</code> installed.</p>
+<p>To install with <code>pip</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -e $HPILO_EXPORTER_DIR</span><br></pre></td></tr></table></figure>
+
+<p>Then just:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hpilo-exporter [--address=0.0.0.0 --port=9416 --endpoint=&quot;/metrics&quot;]</span><br></pre></td></tr></table></figure>
+
+
+<p>HPILO is also available on <a target="_blank" rel="noopener" href="https://pypi.org/project/hpilo-exporter/">Pypi</a> so it can be installed directly:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install hpilo-exporter</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>Prebuild images are available from the docker repository:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idnt/hpilo-exporter:latest</span><br></pre></td></tr></table></figure>
+
+
+<p>To build the image yourself</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build --rm -t hpilo-exporter .</span><br></pre></td></tr></table></figure>
+
+<p>To run the container</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9416:9416 hpilo-exporter:latest</span><br></pre></td></tr></table></figure>
+
+<p>You can then call the web server on the defined endpoint, <code>/metrics</code> by default.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &#x27;http://127.0.0.1:9416/metrics?ilo_host=127.0.0.1&amp;ilo_port=443&amp;ilo_user=admin&amp;ilo_password=admin&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>Passing argument to the docker run command</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9416:9416 hpilo-exporter:latest --port 9416 --ilo_user my_user --ilo_password my_secret_password</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker compose"></a>Docker compose</h3><p>Here is an example of Docker Compose deployment:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hpilo:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">my.registry/hpilo-exporter</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9416</span><span class="string">:9416</span></span><br><span class="line">    <span class="attr">command:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;--port=9416&#x27;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">placement:</span></span><br><span class="line">        <span class="attr">constraints:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">node.hostname</span> <span class="string">==</span> <span class="string">my_node.domain</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>A helm chart is available at <a target="_blank" rel="noopener" href="https://github.com/IDNT/prometheus-helm-addons">prometheus-helm-addons</a>.</p>
+<h3 id="Prometheus-config"><a href="#Prometheus-config" class="headerlink" title="Prometheus config"></a>Prometheus config</h3><p>Assuming:</p>
+<ul>
+<li>the exporter is available on <code>http://hpilo:9416</code></li>
+<li>you use same the port,username and password for all your iLO</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">&#x27;hpilo&#x27;</span></span><br><span class="line">  <span class="attr">scrape_interval:</span> <span class="string">1m</span></span><br><span class="line">  <span class="attr">scrape_timeout:</span> <span class="string">30s</span></span><br><span class="line">  <span class="attr">params:</span></span><br><span class="line">    <span class="attr">ilo_port:</span> [<span class="string">&#x27;443&#x27;</span>]</span><br><span class="line">    <span class="attr">ilo_user:</span> [<span class="string">&#x27;my_ilo_user&#x27;</span>]</span><br><span class="line">    <span class="attr">ilo_password:</span> [<span class="string">&#x27;my_ilo_password&#x27;</span>]</span><br><span class="line">  <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ilo_fqdn.domain</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">relabel_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">source_labels:</span> [<span class="string">__address__</span>]</span><br><span class="line">      <span class="attr">target_label:</span> <span class="string">__param_ilo_host</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">source_labels:</span> [<span class="string">__param_ilo_host</span>]</span><br><span class="line">      <span class="attr">target_label:</span> <span class="string">ilo_host</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">target_label:</span> <span class="string">__address__</span></span><br><span class="line">      <span class="attr">replacement:</span> <span class="string">hpilo:8082</span>  <span class="comment"># hpilo exporter.</span></span><br></pre></td></tr></table></figure>
+
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/08/05/windows-Royal-TS-%E9%81%A0%E7%AB%AF%E9%9A%9C%E7%A4%99/"
+      title="Windows Royal TS 遠端障礙"
+     >
+
+    <p class="title-text">
+      
+        Windows Royal TS 遠端障礙
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
