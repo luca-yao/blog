@@ -7,4 +7,4 @@ Disallow: /vendors/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
-Sitemap: https://luca-yao-s-blog.web.app//sitemap.xml
+Sitemap: https://luca-yao-s-blog.web.app/sitemap.xml
