@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Smokeping 安裝與配置(含Tcpping小BUG調整) | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
+
+  <meta name="description" content="前言上次說到要配合Grafana使用的話，必須要先安裝Somkeping，因為擔心把篇幅拉得太長也沒必要，所以拆開來 (´・ω・&#96;) 如果你是之前沒看到，可以從這邊過去 將Somkeping整合進Grafana呈現 如果覺得麻煩，這邊也有自動安裝的腳本可以使用 こっち 進入正題以下由Centos 7為範例 1yum install epel-release . 接著安裝smokeping">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smokeping 安裝與配置(含Tcpping小BUG調整)">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2023/08/20/Smokeping-%E5%AE%89%E8%A3%9D%E8%88%87%E9%85%8D%E7%BD%AE-%E5%90%ABTcpping%E5%B0%8FBUG%E8%AA%BF%E6%95%B4/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="前言上次說到要配合Grafana使用的話，必須要先安裝Somkeping，因為擔心把篇幅拉得太長也沒必要，所以拆開來 (´・ω・&#96;) 如果你是之前沒看到，可以從這邊過去 將Somkeping整合進Grafana呈現 如果覺得麻煩，這邊也有自動安裝的腳本可以使用 こっち 進入正題以下由Centos 7為範例 1yum install epel-release . 接著安裝smokeping">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-08-20T14:20:26.000Z">
+<meta property="article:modified_time" content="2023-08-20T15:06:14.221Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="luca, 盧卡, 莫卡, Cisco, 網路, 網頁, 雜事, blog, 系統">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/1.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/stelliva4.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是 Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Monitor/">
+                Monitor
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">3</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Device/">
+                Device
+                <div class="category-count">1</div>
+            </a>
+        
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">10 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2023/08/20/Smokeping-%E5%AE%89%E8%A3%9D%E8%88%87%E9%85%8D%E7%BD%AE-%E5%90%ABTcpping%E5%B0%8FBUG%E8%AA%BF%E6%95%B4/" title="Smokeping 安裝與配置(含Tcpping小BUG調整)" >
+            <div class="recent-link-text">
+              Smokeping 安裝與配置(含Tcpping小BUG調整)
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/17/Python-Netmiko%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD%E7%B6%B2%E8%B7%AF%E8%A8%AD%E5%82%99-Fortinet-Cisco/" title="Python自動化備份Fortinet、Cisco" >
+            <div class="recent-link-text">
+              Python自動化備份Fortinet、Cisco
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/12/%E5%B0%87Somkeping%E6%95%B4%E5%90%88%E9%80%B2Grafana%E5%91%88%E7%8F%BE/" title="將Somkeping整合進Grafana呈現" >
+            <div class="recent-link-text">
+              將Somkeping整合進Grafana呈現
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/10/Grafana-Blackbox-%E7%9B%A3%E6%8E%A7Website%E6%95%88%E8%83%BD%E8%88%87%E7%8B%80%E6%85%8B/" title="Grafana-Blackbox-監控Website效能與狀態" >
+            <div class="recent-link-text">
+              Grafana-Blackbox-監控Website效能與狀態
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/08/Grafana-Transform-%E5%8F%83%E6%95%B8%E4%BB%8B%E7%B4%B9/" title="Grafana-Transform-參數介紹" >
+            <div class="recent-link-text">
+              Grafana-Transform-參數介紹
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Smokeping-安裝與配置-含Tcpping小BUG調整" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Smokeping 安裝與配置(含Tcpping小BUG調整)
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-08-20T14:20:26.000Z" itemprop="datePublished">2023-08-20</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分類 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.1k 詞 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上次說到要配合Grafana使用的話，必須要先安裝Somkeping，因為擔心把篇幅拉得太長也沒必要，所以拆開來 (´・ω・&#96;)</p>
+<p>如果你是之前沒看到，可以從這邊過去 <a href="https://luca-yao-s-blog.web.app/2023/08/12/%E5%B0%87Somkeping%E6%95%B4%E5%90%88%E9%80%B2Grafana%E5%91%88%E7%8F%BE/">將Somkeping整合進Grafana呈現</a></p>
+<p>如果覺得麻煩，這邊也有自動安裝的腳本可以使用 <a target="_blank" rel="noopener" href="https://github.com/luca-yao/smokeping_auto_install">こっち</a></p>
+<h2 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h2><p>以下由Centos 7為範例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br></pre></td></tr></table></figure>
+<p>. 接著安裝smokeping 所需的套件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perl httpd httpd-devel mod_fcgid rrdtool perl-CGI-SpeedyCGI fping rrdtool-perl perl-Sys-Syslog gcc gcc-c++ libxml* pango*  freetype-devel zlib-devel libpng-devel libart_lgpl-devel apr-util-devel apr-devel</span><br></pre></td></tr></table></figure>
+<p>. 安裝rrdtool</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install libart_lgpl-devel zlib-devel libpng-devel freetype-devel  cairo-devel libxml2-devel pango-devel dejavu-lgc-fonts* pango* freetype* rrdtool-perl</span><br></pre></td></tr></table></figure>
+<p>※中文顯示有問題，則安裝wqy套件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wqy*</span><br></pre></td></tr></table></figure>
+<p>. 安裝CPAN模組：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perl-CPAN perl-local-lib perl-Time-HiRes</span><br></pre></td></tr></table></figure>
+
+<p>. 安裝好所需的套件後, 現在到官網下載 SmokePing 原始碼安裝, 目前最新的版本是 2.6.11:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://oss.oetiker.ch/smokeping/pub/smokeping-2.6.11.tar.gz</span><br></pre></td></tr></table></figure>
+<p>. 解壓縮原始碼:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf smokeping-2.6.11.tar.gz</span><br></pre></td></tr></table></figure>
+<p>. 安裝 SmokePing 所需的 Perl 模組, 以及編譯 SmokePing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> cd smokeping-2.6.11/</span><br><span class="line">./configure --prefix=/usr/local/smokeping</span><br><span class="line">./setup/build-perl-modules.sh /usr/local/smokeping/thirdparty</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>. 安裝fping:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://fping.org/dist/fping-3.10.tar.gz</span><br><span class="line">tar -zxvf fping-3.10.tar.gz</span><br><span class="line">cd fping-3.10</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>. 確認Fping的位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">whereis fping</span><br><span class="line">fping: /usr/local/sbin/fping</span><br></pre></td></tr></table></figure>
+
+<p>. 建立資料夾</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir  /usr/local/smokeping/cache</span><br><span class="line">mkdir  /usr/local/smokeping/var</span><br><span class="line">mkdir  /usr/local/smokeping/data</span><br></pre></td></tr></table></figure>
+
+<p>. 變更權限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R apache:apache /usr/local/smokeping/cache</span><br><span class="line"><span class="built_in">chown</span> -R apache:apache /usr/local/smokeping/var</span><br><span class="line"><span class="built_in">chown</span> -R apache:apache /usr/local/smokeping/data</span><br><span class="line"></span><br><span class="line"><span class="built_in">chown</span> -R nginx:nginx /usr/local/smokeping/cache</span><br><span class="line"><span class="built_in">chown</span> -R nginx:nginx /usr/local/smokeping/var</span><br><span class="line"><span class="built_in">chown</span> -R nginx:nginx /usr/local/smokeping/data</span><br></pre></td></tr></table></figure>
+
+<p>. 設定Apache</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/httpd/conf.d/smokeping.conf</span><br><span class="line"></span><br><span class="line">Alias /smokeping/cache /usr/local/smokeping/cache/</span><br><span class="line">Alias /smokeping/cropper /usr/local/smokeping/htdocs/cropper/</span><br><span class="line">Alias /smokeping /usr/local/smokeping/htdocs</span><br><span class="line"></span><br><span class="line">&lt;Directory /usr/local/smokeping&gt;</span><br><span class="line"> AllowOverride None</span><br><span class="line"> Options All</span><br><span class="line"> AddHandler cgi-script .fcgi .cgi</span><br><span class="line"> Order allow,deny</span><br><span class="line"> Allow from all</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+
+<p>. 配置smokeping 設定檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/etc/basepage.html.dist /usr/local/smokeping/etc/basepage.html</span><br><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/etc/config.dist /usr/local/smokeping/etc/config</span><br><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/etc/smokemail.dist /usr/local/smokeping/etc/smokemail</span><br><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/etc/smokeping_secrets.dist /usr/local/smokeping/etc/smokeping_secrets</span><br><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/etc/tmail.dist /usr/local/smokeping/etc/tmail</span><br></pre></td></tr></table></figure>
+
+<p>. 修改smokeping_secrets權限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 400 /usr/local/smokeping/etc/smokeping_secrets</span><br></pre></td></tr></table></figure>
+
+<p>. 設定smokeping config</p>
+<p>vim &#x2F;usr&#x2F;local&#x2F;smokeping&#x2F;etc&#x2F;config</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">owner    = Owner                                   <span class="comment">#擁有者</span></span><br><span class="line">contact  = example.com                             <span class="comment">#E-MAIL</span></span><br><span class="line">mailhost = mail.example.com                        <span class="comment">#E-MAIL主機</span></span><br><span class="line">sendmail = /usr/sbin/sendmail</span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> do not put the Image Cache below cgi-bin</span></span><br><span class="line"><span class="comment"># since all files under cgi-bin will be executed ... this is not</span></span><br><span class="line"><span class="comment"># good for images.</span></span><br><span class="line">imgcache = /usr/local/smokeping/cache</span><br><span class="line">imgurl   = cache</span><br><span class="line">datadir  = /usr/local/smokeping/data</span><br><span class="line">piddir  = /usr/local/smokeping/var</span><br><span class="line">cgiurl   = http://localhost/bin/smokeping_cgi  <span class="comment">#IP為你這台主機的IP</span></span><br><span class="line">smokemail = /usr/local/smokeping/etc/smokemail</span><br><span class="line">tmail = /usr/local/smokeping/etc/tmail</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*** Presentation ***</span><br><span class="line"></span><br><span class="line">template = /usr/local/smokeping/etc/basepage.html</span><br><span class="line">charset = utf-8                                <span class="comment">#顯示中文</span></span><br><span class="line"></span><br><span class="line">*** Slaves ***</span><br><span class="line">secrets=/usr/local/smokeping/etc/smokeping_secrets</span><br><span class="line">+boomer</span><br><span class="line">display_name=boomer</span><br><span class="line">color=0000ff</span><br></pre></td></tr></table></figure>
+
+<p>. 建立啟動程序<br>vim &#x2F;etc&#x2F;init.d&#x2F;smokeping</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># smokeping    This starts and stops the smokeping daemon</span><br><span class="line"># chkconfig: 345 98 11</span><br><span class="line"># description: Start/Stop the smokeping daemon</span><br><span class="line"># processname: smokeping</span><br><span class="line"># Source function library.</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"></span><br><span class="line">SMOKEPING=/usr/local/smokeping/bin/smokeping</span><br><span class="line">LOCKF=/var/lock/subsys/smokeping</span><br><span class="line">CONFIG=/usr/local/smokeping/etc/config</span><br><span class="line"></span><br><span class="line">[ -f $SMOKEPING ] || exit 0</span><br><span class="line">[ -f $CONFIG ] || exit 0</span><br><span class="line"></span><br><span class="line">RETVAL=0</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">  start)</span><br><span class="line">        echo -n $&quot;Starting SMOKEPING: &quot;</span><br><span class="line">        daemon $SMOKEPING</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        echo</span><br><span class="line">        [ $RETVAL -eq 0 ] &amp;&amp; touch $LOCKF</span><br><span class="line">        ;;</span><br><span class="line">  stop)</span><br><span class="line">        echo -n $&quot;Stopping SMOKEPING: &quot;</span><br><span class="line">        killproc $SMOKEPING</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        echo</span><br><span class="line">        [ $RETVAL -eq 0 ] &amp;&amp; rm -f $LOCKF</span><br><span class="line">        ;;</span><br><span class="line">  status)</span><br><span class="line">        status smokeping</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        ;;</span><br><span class="line">  reload)</span><br><span class="line">        echo -n $&quot;Reloading SMOKEPING: &quot;</span><br><span class="line">        killproc $SMOKEPING -HUP</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        echo</span><br><span class="line">        ;;</span><br><span class="line">  restart)</span><br><span class="line">        $0 stop</span><br><span class="line">        sleep 3</span><br><span class="line">        $0 start</span><br><span class="line">        RETVAL=$?</span><br><span class="line">        ;;</span><br><span class="line">  condrestart)</span><br><span class="line">        if [ -f $LOCKF ]; then</span><br><span class="line">                $0 stop</span><br><span class="line">                sleep 3</span><br><span class="line">                $0 start</span><br><span class="line">                RETVAL=$?</span><br><span class="line">        fi</span><br><span class="line">        ;;</span><br><span class="line">  *)</span><br><span class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|reload|condrestart&#125;&quot;</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">exit $RETVAL</span><br></pre></td></tr></table></figure>
+<p>. 修改啟動檔權限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 /etc/init.d/smokeping</span><br></pre></td></tr></table></figure>
+<p>. 修改網頁檔名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> /usr/local/smokeping/htdocs/smokeping.fcgi.dist /usr/local/smokeping/htdocs/smokeping.cgi</span><br></pre></td></tr></table></figure>
+<p>. 啟動smokeping</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service smokeping start</span><br></pre></td></tr></table></figure>
+
+<h2 id="可能出現的例外錯誤"><a href="#可能出現的例外錯誤" class="headerlink" title="可能出現的例外錯誤"></a>可能出現的例外錯誤</h2><ol>
+<li>如果出現<code>Apache 403 Forbidden</code></li>
+</ol>
+<p>在conf中加入</p>
+<blockquote>
+<p>Require All granted</p>
+</blockquote>
+<h2 id="TCP-Ping-的BUG修改"><a href="#TCP-Ping-的BUG修改" class="headerlink" title="TCP Ping 的BUG修改"></a>TCP Ping 的BUG修改</h2><p>經過大排長龍的設定後，自此Smokeping就安裝完成啦~但你會發現Tcpping的時候資料很奇怪，是因為tcptraceroute呈現改變了，因此要以下調整：</p>
+<p>vim &#x2F;usr&#x2F;bin&#x2F;tcpping</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ttr=`tcptraceroute -f <span class="variable">$&#123;ttl&#125;</span> -m <span class="variable">$&#123;ttl&#125;</span> -q <span class="variable">$&#123;q&#125;</span> -w <span class="variable">$&#123;w&#125;</span> $*  2&gt;&amp;1` </span><br><span class="line">改成</span><br><span class="line">ttr=`tcptraceroute -f <span class="variable">$&#123;ttl&#125;</span> -m <span class="variable">$&#123;ttl&#125;</span> -q <span class="variable">$&#123;q&#125;</span> -w <span class="variable">$&#123;w&#125;</span> $* |grep -v traceroute 2&gt;&amp;1`</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">ttr=`tcptraceroute -f <span class="variable">$&#123;ttl&#125;</span> -m <span class="variable">$&#123;ttl&#125;</span> -q <span class="variable">$&#123;q&#125;</span> -w <span class="variable">$&#123;w&#125;</span> $*  2&gt;/dev/null`</span><br><span class="line">改成</span><br><span class="line">ttr=`tcptraceroute -f <span class="variable">$&#123;ttl&#125;</span> -m <span class="variable">$&#123;ttl&#125;</span> -q <span class="variable">$&#123;q&#125;</span> -w <span class="variable">$&#123;w&#125;</span> $* |grep -v traceroute 2&gt;/dev/null`</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二個-bug"><a href="#第二個-bug" class="headerlink" title="第二個 bug"></a>第二個 bug</h2><p>為甚麼延遲都是255，上網查了之後這是smokeping的BUG。</p>
+<p>你用tcpping -C -x 1 <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a> 80 永遠都是255。</p>
+<p>照着如下修改：</p>
+<p>vi &#x2F;usr&#x2F;bin&#x2F;tcpping</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rtt=`<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;ttr&#125;</span>&quot;</span> | sed <span class="string">&#x27;s/.*] //&#x27;</span> | awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>`</span><br><span class="line">改成</span><br><span class="line">rtt=`<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;ttr&#125;</span>&quot;</span> | sed <span class="string">&#x27;s/.*] //&#x27;</span> | awk <span class="string">&#x27;&#123;print $5&#125;&#x27;</span>`</span><br></pre></td></tr></table></figure>
+<p>修改完後再重啟smokeping就完成了。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/08/17/Python-Netmiko%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD%E7%B6%B2%E8%B7%AF%E8%A8%AD%E5%82%99-Fortinet-Cisco/"
+      title="Python自動化備份Fortinet、Cisco"
+     >
+
+    <p class="title-text">
+      
+        Python自動化備份Fortinet、Cisco
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
