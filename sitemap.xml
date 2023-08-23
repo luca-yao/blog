@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/</loc>
+    
+    <lastmod>2023-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/2023/08/22/Grafana-Loki-Promtail-%E6%B7%BA%E8%AB%87%E5%B0%8F%E7%8E%A9/</loc>
     
     <lastmod>2023-08-22</lastmod>
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://luca-yao-s-blog.web.app/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,49 +156,49 @@
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Grafana/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Linux/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Loki/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Windows/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -198,28 +207,28 @@
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Monitor/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Coding/</loc>
-    <lastmod>2023-08-22</lastmod>
+    <lastmod>2023-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
