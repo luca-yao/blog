@@ -145,6 +145,11 @@
     <div class="widget">
       <h3 class="widget-title">分類</h3>
       <div class="category-box">
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">3</div>
+            </a>
+        
             <a class="category-link" href="/categories/Device/">
                 Device
                 <div class="category-count">1</div>
@@ -153,11 +158,6 @@
             <a class="category-link" href="/categories/Monitor/">
                 Monitor
                 <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/System/">
-                System
-                <div class="category-count">2</div>
             </a>
         
             <a class="category-link" href="/categories/Coding/">
@@ -174,7 +174,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">標籤</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
     </div>
   </div>
 
@@ -268,21 +268,44 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    未分類 
+  <a class="meta-cate-link" href="/categories/System/">System</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 詞 
+            659 詞 
           </div>
         </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li></ul>
+
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-              
+            前言因為最近有朋友在問Nginx該怎麼設定，所以就打算來分享一下Nginx的架設方法，順便與各位分享一下我在使用上碰到的問題，所以會再加上一點系統調整的地方。
+※本次用途只是簡單的做TCP LoadBalance的功能。
+
+那就開始吧! (･ω´･ )
+
+正題
+首先就是CentOS最好用的夥伴
+1yum install epel-release
+
+安裝Nginx
+1yum install nginx
+預設開機啟動
+1systemctl enable nginx
+啟動Nginx
+1systemctl start nginx
+設定防火牆永久允許HTTP
+12firewall-cmd --permanent --zone=public --add-service=http;firewall-cmd --reload;
+
+結束，下課
+σ ﾟ∀ ﾟ) ﾟ∀ﾟ)σ
+設定vim &#x2F;etc&#x2F;nginx&#x2F;nginx.conf
+123456789101112131415161718192021222324252627user  root;worker_processes...  
           </div>
         
       </div>
@@ -291,12 +314,14 @@
     </div>
     
      
-    <a class="right-panel  non-pic  "
-      
+    <a class="right-panel  with-pic  "
+       style="background-image: url(/covers/mizukitanaka_cute_wolf_girl_with_red_ribbon_on_the_head_white_h_d81730ba-a843-4fad-9928-9fc7b2614b0f.png)" 
       href="/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/" 
     >
        
-      <i class="fa-solid fa-angle-right non-pic"></i>
+      <div class="overlay">
+        <i class="fa-solid fa-angle-right with-pic"></i>
+      </div>
        
     </a>
      

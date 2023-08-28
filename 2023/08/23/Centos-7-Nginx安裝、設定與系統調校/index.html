@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="true" > 
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
 <link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="/fontawesome/css/brands.css" rel="stylesheet">
 <link href="/fontawesome/css/solid.css" rel="stylesheet">
@@ -21,18 +21,21 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
 
-  <meta name="description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+  <meta name="description" content="前言因為最近有朋友在問Nginx該怎麼設定，所以就打算來分享一下Nginx的架設方法，順便與各位分享一下我在使用上碰到的問題，所以會再加上一點系統調整的地方。 ※本次用途只是簡單的做TCP LoadBalance的功能。  那就開始吧! (･ω´･ )  正題 首先就是CentOS最好用的夥伴 1yum install epel-release  安裝Nginx 1yum install ngin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos 7 Nginx安裝、設定與系統調校">
 <meta property="og:url" content="https://luca-yao-s-blog.web.app/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/index.html">
 <meta property="og:site_name" content="Luca Yao&#39;s blog">
-<meta property="og:description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+<meta property="og:description" content="前言因為最近有朋友在問Nginx該怎麼設定，所以就打算來分享一下Nginx的架設方法，順便與各位分享一下我在使用上碰到的問題，所以會再加上一點系統調整的地方。 ※本次用途只是簡單的做TCP LoadBalance的功能。  那就開始吧! (･ω´･ )  正題 首先就是CentOS最好用的夥伴 1yum install epel-release  安裝Nginx 1yum install ngin">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/covers/mizukitanaka_cute_wolf_girl_with_red_ribbon_on_the_head_white_h_d81730ba-a843-4fad-9928-9fc7b2614b0f.png">
 <meta property="article:published_time" content="2023-08-23T14:38:48.000Z">
-<meta property="article:modified_time" content="2023-08-23T14:38:48.357Z">
+<meta property="article:modified_time" content="2023-08-23T15:59:11.621Z">
 <meta property="article:author" content="Luca Yao">
-<meta property="article:tag" content="luca, 盧卡, 莫卡, Cisco, 網路, 網頁, 雜事, blog, 系統">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/covers/mizukitanaka_cute_wolf_girl_with_red_ribbon_on_the_head_white_h_d81730ba-a843-4fad-9928-9fc7b2614b0f.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -147,6 +150,11 @@
     <div class="widget">
       <h3 class="widget-title">分類</h3>
       <div class="category-box">
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">3</div>
+            </a>
+        
             <a class="category-link" href="/categories/Device/">
                 Device
                 <div class="category-count">1</div>
@@ -155,11 +163,6 @@
             <a class="category-link" href="/categories/Monitor/">
                 Monitor
                 <div class="category-count">6</div>
-            </a>
-        
-            <a class="category-link" href="/categories/System/">
-                System
-                <div class="category-count">2</div>
             </a>
         
             <a class="category-link" href="/categories/Coding/">
@@ -176,7 +179,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">標籤</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
     </div>
   </div>
 
@@ -248,6 +251,16 @@
 <article id="post-Centos-7-Nginx安裝、設定與系統調校" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_cllv0uhx50001o8v4fxnm0zh2">
+        <img src="/covers/mizukitanaka_cute_wolf_girl_with_red_ribbon_on_the_head_white_h_d81730ba-a843-4fad-9928-9fc7b2614b0f.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
    
   <div class="article-inner">
     <div class="article-main">
@@ -271,20 +284,63 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    未分類 
+  <a class="meta-cate-link" href="/categories/System/">System</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 詞 
+            659 詞 
           </div>
         </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li></ul>
+
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>因為最近有朋友在問Nginx該怎麼設定，所以就打算來分享一下Nginx的架設方法，順便與各位分享一下我在使用上碰到的問題，所以會再加上一點系統調整的地方。</p>
+<p>※本次用途只是簡單的做TCP LoadBalance的功能。</p>
+<blockquote>
+<p>那就開始吧! (･ω´･ )</p>
+</blockquote>
+<h2 id="正題"><a href="#正題" class="headerlink" title="正題"></a>正題</h2><ul>
+<li><p>首先就是CentOS最好用的夥伴</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安裝Nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>預設開機啟動</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>啟動Nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure></li>
+<li><p>設定防火牆永久允許HTTP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=public --add-service=http;</span><br><span class="line">firewall-cmd --reload;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>結束，下課</p>
+<h1 id="σ-ﾟ∀-ﾟ-ﾟ∀ﾟ-σ"><a href="#σ-ﾟ∀-ﾟ-ﾟ∀ﾟ-σ" class="headerlink" title="σ ﾟ∀ ﾟ) ﾟ∀ﾟ)σ"></a>σ ﾟ∀ ﾟ) ﾟ∀ﾟ)σ</h1><hr>
+<h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><p>vim &#x2F;etc&#x2F;nginx&#x2F;nginx.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">user  root;</span><br><span class="line">worker_processes  8;                               <span class="comment"># 指定Nginx可以開啟的程式數量，一般為CPU的兩倍</span></span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">worker_rlimit_nofile 41000;                        <span class="comment"># 此參數的作用是改變Worker Processes 能打開的最大文檔數</span></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  20000;                     <span class="comment"># 單個Processes的最大連線數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    log_format  main  <span class="string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line">    <span class="comment">#include /etc/nginx/conf.d/*.conf;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">include /etc/nginx/tcp.d/*.conf;</span><br></pre></td></tr></table></figure>
+
+<p>vim &#x2F;etc&#x2F;nginx&#x2F;tcp.d&#x2F;example.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line"></span><br><span class="line">log_format basic <span class="string">&#x27;source=$remote_addr [$time_local] status=$status session_time=$session_time upstream_addr=$upstream_addr&quot; upstream_connect_time=&quot;$upstream_connect_time&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    log_format example <span class="string">&#x27;$remote_addr [$time_local] &#x27;</span></span><br><span class="line">                 <span class="string">&#x27;$protocol $status $bytes_sent $bytes_received &#x27;</span></span><br><span class="line">                 <span class="string">&#x27;$session_time &quot;$upstream_addr&quot; &#x27;</span></span><br><span class="line">                 <span class="string">&#x27;&quot;$upstream_bytes_sent&quot; &quot;$upstream_bytes_received&quot; &quot;$upstream_connect_time&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    access_log /var/log/nginx/access.log basic;</span><br><span class="line">    error_log /var/log/nginx/error.log warn;</span><br><span class="line"></span><br><span class="line">    upstream game &#123;</span><br><span class="line">       least_conn;                   <span class="comment"># 最少連線數</span></span><br><span class="line">       server 192.168.1.1:15688 ; </span><br><span class="line">       server 192.168.1.2:15688 ; </span><br><span class="line">       server 192.168.1.3:15688 ; </span><br><span class="line">       server 192.168.1.4:15688 ; </span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 12000;</span><br><span class="line">    proxy_pass game;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">~           </span><br></pre></td></tr></table></figure>
+
+<p>Upstream Balancing Algorithm 有以下四種可以選</p>
+<ul>
+<li>(round robin): 預設值。每個server會依序接到新進來的request。</li>
+<li>least_conn: 新的連線總是會被送到有最少active connections的後端。在connection至後端會持續一段時間的時候特別有用。</li>
+<li>ip_hash: 這個平衡演算法依據client IP把request分到不同的server。前三個位元組被用作key去決定那個server要處理此request。結果是client傾向於被同一個server服務，可以幫助保持session一致。</li>
+<li>hash: 此平衡演算主要使用memecached代理。Server依據隨機的hash key被區分。可以是文本，變數或組合。這是唯一須要使用者提供資料作為key。</li>
+</ul>
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>本次案例僅透過least_conn 來進行loadbalance的調配，所以設定上較為簡單，也沒有針對Buffer做調校，畢竟這類設定還是得依需求調整。</p>
+<h2 id="系統調校"><a href="#系統調校" class="headerlink" title="系統調校"></a>系統調校</h2><p>vim &#x2F;etc&#x2F;sysctl.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30</span><br><span class="line">net.netfilter.nf_conntrack_max=1966080</span><br><span class="line"></span><br><span class="line">net.core.somaxconn = 65535</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 819200</span><br><span class="line">net.core.netdev_max_backlog = 819200</span><br><span class="line">net.ipv4.ip_local_port_range = 1024 65535</span><br></pre></td></tr></table></figure>
+
+<p>vim &#x2F;etc&#x2F;security&#x2F;limits.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*    soft    nofile    65000</span><br><span class="line">*    hard    nofile    65000</span><br><span class="line">*    hard    nofile    65535</span><br><span class="line">*    soft    nofile    unlimited</span><br><span class="line">*    hard    <span class="built_in">nproc</span>     unlimited</span><br><span class="line">*    soft    <span class="built_in">nproc</span>     unlimited</span><br><span class="line"><span class="comment"># End of file</span></span><br></pre></td></tr></table></figure>
+<p>設定完成記得重開機唷!!</p>
+<p>以下是簡單的設定說明，下次再見囉。</p>
+
         
       </div>
 
