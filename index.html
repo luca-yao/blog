@@ -147,7 +147,7 @@
       <div class="category-box">
             <a class="category-link" href="/categories/System/">
                 System
-                <div class="category-count">3</div>
+                <div class="category-count">4</div>
             </a>
         
             <a class="category-link" href="/categories/Device/">
@@ -174,7 +174,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">標籤</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
     </div>
   </div>
 
@@ -268,21 +268,43 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    未分類 
+  <a class="meta-cate-link" href="/categories/System/">System</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 詞 
+            1k 詞 
           </div>
         </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
           <div class="truncate-text">
-              
+            前言上一篇跟各位講到把主機加入AD，那這次來把Freeradius安裝並設定完成吧!
+上一篇的連結在這邊，再次提醒本次是結合LDAP來使用的。
+
+行くぞ！！ (ゝ∀･)
+
+設備安裝與設定※本範例為ＣｅｎｔＯＳ７
+
+安裝epel
+1yum install -y epel-release
+
+安裝 Freeradis與相關套件
+1yum install -y freeradius freeradius-utils samba winbind freeradius-ldap
+
+設置為開機啟動
+1systemctl enable radiusd.service
+
+設定 Freeradius ldap module
+
+
+vim &#x2F;etc&#x2F;reddb&#x2F;mods-available&#x2F;ldap
+1234567891011121314151617181920212223242526272829303132ldap &#123;        server = &#x27;ldap://serverip&#x27;        port =         i...  
           </div>
         
       </div>
@@ -291,12 +313,14 @@
     </div>
     
      
-    <a class="right-panel  non-pic  "
-      
+    <a class="right-panel  with-pic  "
+       style="background-image: url(/covers/MoricisAngel4ever1988_up_close_up_close_of_upper_body_blue_hair_8d1be58b-bcb5-409a-9728-933b62a36c03.png)" 
       href="/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/" 
     >
        
-      <i class="fa-solid fa-angle-right non-pic"></i>
+      <div class="overlay">
+        <i class="fa-solid fa-angle-right with-pic"></i>
+      </div>
        
     </a>
      
@@ -514,11 +538,11 @@ Lambda Promtail
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            729 詞 
+            810 詞 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
@@ -528,17 +552,19 @@ Lambda Promtail
 
 於是就自己做一個吧 (ゝ∀･)
 
+使用者自己連到專用網頁輸入帳號密碼取得OTP驗證QRcode，一切自動化管理這樣的好處是，我不用一個一個加，省得我還要花時間處理，未來要人員離職要處理的部分也單純簡單，一整個好棒棒 (・∀・)
 因為整個作業內容比較麻煩，所以我拆開來來寫比較不會混亂，也方便彼此在確認的時候比較好看，不用一次看個落落長。我信你個鬼
 我使用的系統是Centos 7，首先我們要先把Centos 7加入AD，讓AD控管是方便處理帳號跟後續的規則設定。
+
+第二篇
+
 進入正題  – 將系統加入 AD –. 安裝需求套件：
 1yum install -y samba samba-common samba-client samba-winbind* krb5-workstation ntp
 
 . 設定開機啟動：
 12systemctl enable smbsystemctl enable winbind
 
-. 設定&#x2F;etc&#x2F;hosts:
-1123.123.123.123 myhost myhost.mydomain.com.tw
-. 執行 setup 比較方便，但 CentOS 7 預設沒裝，...  
+. ...  
           </div>
         
       </div>

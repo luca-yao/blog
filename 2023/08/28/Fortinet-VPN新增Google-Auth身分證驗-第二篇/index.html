@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="true" > 
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
 <link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="/fontawesome/css/brands.css" rel="stylesheet">
 <link href="/fontawesome/css/solid.css" rel="stylesheet">
@@ -21,18 +21,21 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
 
-  <meta name="description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+  <meta name="description" content="前言上一篇跟各位講到把主機加入AD，那這次來把Freeradius安裝並設定完成吧! 上一篇的連結在這邊，再次提醒本次是結合LDAP來使用的。  行くぞ！！ (ゝ∀･)  設備安裝與設定※本範例為ＣｅｎｔＯＳ７  安裝epel 1yum install -y epel-release  安裝 Freeradis與相關套件 1yum install -y freeradius freeradius-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fortinet VPN新增Google Auth身分證驗(第二篇)">
 <meta property="og:url" content="https://luca-yao-s-blog.web.app/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/index.html">
 <meta property="og:site_name" content="Luca Yao&#39;s blog">
-<meta property="og:description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+<meta property="og:description" content="前言上一篇跟各位講到把主機加入AD，那這次來把Freeradius安裝並設定完成吧! 上一篇的連結在這邊，再次提醒本次是結合LDAP來使用的。  行くぞ！！ (ゝ∀･)  設備安裝與設定※本範例為ＣｅｎｔＯＳ７  安裝epel 1yum install -y epel-release  安裝 Freeradis與相關套件 1yum install -y freeradius freeradius-">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/covers/MoricisAngel4ever1988_up_close_up_close_of_upper_body_blue_hair_8d1be58b-bcb5-409a-9728-933b62a36c03.png">
 <meta property="article:published_time" content="2023-08-28T15:19:56.000Z">
-<meta property="article:modified_time" content="2023-08-28T15:19:56.410Z">
+<meta property="article:modified_time" content="2023-08-28T16:45:23.927Z">
 <meta property="article:author" content="Luca Yao">
-<meta property="article:tag" content="luca, 盧卡, 莫卡, Cisco, 網路, 網頁, 雜事, blog, 系統">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Freeredis">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/covers/MoricisAngel4ever1988_up_close_up_close_of_upper_body_blue_hair_8d1be58b-bcb5-409a-9728-933b62a36c03.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -149,7 +152,7 @@
       <div class="category-box">
             <a class="category-link" href="/categories/System/">
                 System
-                <div class="category-count">3</div>
+                <div class="category-count">4</div>
             </a>
         
             <a class="category-link" href="/categories/Device/">
@@ -176,7 +179,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">標籤</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
     </div>
   </div>
 
@@ -248,6 +251,16 @@
 <article id="post-Fortinet-VPN新增Google-Auth身分證驗-第二篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_cllv41ukv0008fkv44f1o4gdd">
+        <img src="/covers/MoricisAngel4ever1988_up_close_up_close_of_upper_body_blue_hair_8d1be58b-bcb5-409a-9728-933b62a36c03.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
    
   <div class="article-inner">
     <div class="article-main">
@@ -271,20 +284,112 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    未分類 
+  <a class="meta-cate-link" href="/categories/System/">System</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 詞 
+            1k 詞 
           </div>
         </div>
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一篇跟各位講到把主機加入AD，那這次來把<code>Freeradius</code>安裝並設定完成吧!</p>
+<p>上一篇的連結<a href="https://luca-yao-s-blog.web.app/2023/08/22/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97(%E7%AC%AC%E4%B8%80%E7%AF%87)/">在這邊</a>，再次提醒本次是結合LDAP來使用的。</p>
+<blockquote>
+<p>行くぞ！！ (ゝ∀･)</p>
+</blockquote>
+<h2 id="設備安裝與設定"><a href="#設備安裝與設定" class="headerlink" title="設備安裝與設定"></a>設備安裝與設定</h2><p>※本範例為ＣｅｎｔＯＳ７</p>
+<ul>
+<li><p>安裝epel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安裝 Freeradis與相關套件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y freeradius freeradius-utils samba winbind freeradius-ldap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>設置為開機啟動</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable radiusd.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>設定 Freeradius ldap module</p>
+</li>
+</ul>
+<p>vim &#x2F;etc&#x2F;reddb&#x2F;mods-available&#x2F;ldap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">ldap &#123;</span><br><span class="line">        server = &#x27;ldap://serverip&#x27;</span><br><span class="line">        port = </span><br><span class="line">        identity = &#x27;cn=username,ou=部門2,ou=部門1,dc=company,dc=com&#x27;</span><br><span class="line">        password = password</span><br><span class="line">        base_dn = &#x27;ou=部門,dc=公司,dc=com&#x27;</span><br><span class="line">        sasl &#123;</span><br><span class="line">        &#125;</span><br><span class="line">update &#123;</span><br><span class="line">                control:Password-With-Header    += &#x27;userPassword&#x27;</span><br><span class="line">                control:NT-Password             := &#x27;ntPassword&#x27;</span><br><span class="line">                control:                        += &#x27;radiusControlAttribute&#x27;</span><br><span class="line">                request:                        += &#x27;radiusRequestAttribute&#x27;</span><br><span class="line">                reply:                          += &#x27;radiusReplyAttribute&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">        edir = no</span><br><span class="line">        edir_autz = yes</span><br><span class="line">        user &#123;</span><br><span class="line">                sasl &#123;</span><br><span class="line">                &#125;</span><br><span class="line">        scope = &#x27;sub&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">group &#123;</span><br><span class="line">                base_dn = &quot;ou=部門,dc=公司,dc=com&quot;</span><br><span class="line">                filter = &#x27;(objectClass=Group)&#x27;</span><br><span class="line">                scope = &#x27;sub&#x27;</span><br><span class="line">                name_attribute = cn</span><br><span class="line">                membership_filter = &quot;(|(member=%&#123;control:Ldap-UserDn&#125;)(memberUid=%&#123;%&#123;Stripped-User-Name&#125;:-%&#123;User-Name&#125;&#125;))&quot;</span><br><span class="line">                membership_attribute = &#x27;memberOf&#x27;</span><br><span class="line">                cacheable_name = &#x27;yes&#x27;</span><br><span class="line">                cacheable_dn = &#x27;yes&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>設定連結<blockquote>
+<p>ln -s &#x2F;etc&#x2F;raddb&#x2F;mods-available&#x2F;ldap &#x2F;etc&#x2F;raddb&#x2F;mods-enabled&#x2F;</p>
+</blockquote>
+</li>
+</ul>
+<p>會長這樣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll /etc/raddb/mods-enabled/ldap </span><br><span class="line">lrwxrwxrwx 1 root root 30 Jul 17 18:19 /etc/raddb/mods-enabled/ldap -&gt; /etc/raddb/mods-available/ldap</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改client.conf</li>
+</ul>
+<p>vim &#x2F;etc&#x2F;raddb&#x2F;client.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">client firewall &#123;</span><br><span class="line">        ipaddr          = </span><br><span class="line">        secret          = </span><br><span class="line">        require_message_authenticator = no</span><br><span class="line">        nas_type = other</span><br><span class="line">        shortname = fortinet</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">client windows-AD &#123;</span><br><span class="line">        ipaddr          = </span><br><span class="line">        secret          = </span><br><span class="line">        require_message_authenticator = no</span><br><span class="line">        nas_type = other</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>設定成之PAM驗證 與 測試帳號</li>
+</ul>
+<p>vim &#x2F;etc&#x2F;raddb&#x2F;users</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT Auth-Type := PAM</span><br><span class="line"></span><br><span class="line">將下列的# 刪除</span><br><span class="line">#bob     Cleartext-Password := &quot;hello&quot;</span><br><span class="line">#       Reply-Message := &quot;Hello, %&#123;User-Name&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改freeredius啟動的使用者與群組</li>
+</ul>
+<p>vim &#x2F;etc&#x2F;raddb&#x2F;radiusd.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = root</span><br><span class="line">group = root</span><br></pre></td></tr></table></figure>
+<p>我自己有碰到修改失敗，所以還得去改</p>
+<p>vim &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;radiusd.service</p>
+<ul>
+<li>為了可以在Fortigate上設置群組判別，需要傳遞Vendor Specific Attribute，因此在 raddb &#x2F;policy.d資料夾中，建立以下內容作判斷</li>
+</ul>
+<p>vim &#x2F;etc&#x2F;raddb&#x2F;policy.d&#x2F;company-group</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">group_authorization &#123; </span><br><span class="line">    if (&amp;LDAP-Group[*] == &quot;CN=team,OU=部門,OU=類別,DC=公司,DC=tw&quot;) &#123; </span><br><span class="line">            update reply &#123; </span><br><span class="line">               &amp;Fortinet-Group-Name := &quot;SE_group&quot; </span><br><span class="line">                &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    elsif (&amp;LDAP-Group[*] == &quot;CN=team,OU=部門,OU=類別,DC=公司,DC=tw&quot;) &#123; </span><br><span class="line">          update reply &#123; </span><br><span class="line">                &amp;Fortinet-Group-Name = &quot;SD_group&quot; </span><br><span class="line">                &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    elsif (&amp;LDAP-Group[*] == &quot;CN=team,OU=部門,OU=類別,DC=公司,DC=tw&quot;) &#123;</span><br><span class="line">          update reply &#123;</span><br><span class="line">                &amp;Fortinet-Group-Name = &quot;CP_group&quot;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    elsif (&amp;LDAP-Group[*] == &quot;&quot;CN=team,OU=部門,OU=類別,DC=公司,DC=tw&quot;) &#123;</span><br><span class="line">          update reply &#123;</span><br><span class="line">                &amp;Fortinet-Group-Name = &quot;BP_group&quot;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    else &#123; </span><br><span class="line">        update reply &#123; </span><br><span class="line">                Reply-Message := &quot;Not Authorized to access this system, if you need any help, please call SE team&quot; </span><br><span class="line">            &#125; </span><br><span class="line">        reject </span><br><span class="line">        &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>重啟Freeredius </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart rediusd.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>測試指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radtest bob hello localhost 0 testing123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果成功會有以下資訊</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Sent Access-Request Id 1 from 0.0.0.0:54855 to 127.0.0.1:1812 length 73</span><br><span class="line">	User-Name = <span class="string">&quot;bob&quot;</span></span><br><span class="line">	User-Password = <span class="string">&quot;hello&quot;</span></span><br><span class="line">	NAS-IP-Address = 127.0.0.1</span><br><span class="line">	NAS-Port = 0</span><br><span class="line">	Message-Authenticator = 0x00</span><br><span class="line">	Cleartext-Password = <span class="string">&quot;hello&quot;</span></span><br><span class="line">Received Access-Accept Id 1 from 127.0.0.1:1812 to 0.0.0.0:0 length 32</span><br><span class="line">	Reply-Message = <span class="string">&quot;Hello, bob&quot;</span></span><br><span class="line">(0) -: Expected Access-Accept got Access-Reject</span><br></pre></td></tr></table></figure>
+<p>最後一行出現 Access-Reject 正常，因為測試帳號並沒有存在AD上，所以會失敗，但有從本地收到 Reply-message</p>
+</li>
+<li><p>開啟windows NPS</p>
+</li>
+</ul>
+<p>此時要在去AD上開啟NPS (本次以Windows AD 作範例 )</p>
+<p>伺服器管理員 &gt; 工具 &gt; 網路原則伺服器<br><img src="https://i.imgur.com/0SUF2kW.png" alt="Imgur"><br>RADIUS 用戶端及伺服器 &gt; RADIUS用戶端 &gt; 右鍵 &gt; 新增</p>
+<p><img src="https://i.imgur.com/JeajPlm.png" alt="Imgur"></p>
+<p>按照上列設定 ，謹記 密碼要與 &#x2F;raddb&#x2F;clients.conf 中的密碼一致<br><img src="https://i.imgur.com/Z4BkiJB.png" alt="Imgur"></p>
+<ul>
+<li><p>完成後可以測試 RADIUS與Windows AD的LDAP驗證是否正式完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radtest 使用者帳號 &#x27;使用者密碼&#x27; &#x27;AD的IP&#x27; 0 &#x27;共用密碼&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>顯示下列資訊代表連結成功並且成功驗證帳號</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Sent Access-Request Id 181 from 0.0.0.0:59654 to 192.168.1.1:1812 length 77</span><br><span class="line">	User-Name = &quot;XXXXXX&quot;</span><br><span class="line">	User-Password = &quot;XXXXXXXXX&quot;</span><br><span class="line">	NAS-IP-Address = 127.0.0.1</span><br><span class="line">	NAS-Port = 0</span><br><span class="line">	Message-Authenticator = 0x00</span><br><span class="line">	Cleartext-Password = &quot;XXXXXXXXXXXXXX&quot;</span><br><span class="line">Received Access-Accept Id 181 from 192.168.xxx.xxx:1812 to 0.0.0.0:0 length 142</span><br><span class="line">	Fortinet-Group-Name = &quot;SE_group&quot;</span><br><span class="line">	Framed-Protocol = PPP</span><br><span class="line">	Service-Type = Framed-User</span><br><span class="line">	Class = 0x798605f40000013700010200c0a81fe800000000000000000000000001d957216ba33593000000000000031e</span><br><span class="line">	MS-Link-Utilization-Threshold = 50</span><br><span class="line">	MS-Link-Drop-Time-Limit = 120</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Bounes"><a href="#Bounes" class="headerlink" title="Bounes"></a>Bounes</h2><p>想知道ldap有沒有正常運行或是ldap-group會搜尋到甚麼，可以透過ldapsearch檢查</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install openldap-clients</span><br><span class="line"></span><br><span class="line">ldapsearch -x -LLL -h &quot;LDAP主機IP&quot; -b &quot;ou=company,dc=company,dc=com&quot; -D &quot;CN=username,OU=SYS,OU=company,DC=company,DC=com&quot; -s sub &quot;(&amp;(objectClass=USER)(sAMAccountName=username))&quot; -W</span><br></pre></td></tr></table></figure>
+<p>如果有查到使用者代表正常。</p>
+<h2 id="結尾"><a href="#結尾" class="headerlink" title="結尾"></a>結尾</h2><p>到這邊Freeradius的LDAP設定與介接就完成了~ ヾ(<em>´∀ ˋ</em>)ﾉ</p>
+<p>原則上跟著做應該不太會出錯，真正難的點我個人碰到的事，怎麼確定Freeradius有正確連到AD，必且取得帳號、部門的驗證，這個部份我卡了快一周，基本上這邊過了，後面就雨過天晴了。</p>
+<p>下一篇我們來設定 Google auth套用和自動註冊的網頁設定與實際操作吧!</p>
+<blockquote>
+<p>では、お疲れ様でした~</p>
+</blockquote>
+
         
       </div>
 
