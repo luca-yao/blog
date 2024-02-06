@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Aruba Switch 基礎指令 | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
+
+  <meta name="description" content="前言去年底的時候因為換工作的關係，現在的公司絕大多數的設備都是Aruba的Switch，因此為了方便查詢，把一些常見到的指令做了一些整理  Aruba switch 2930F 基礎指令1.基本操作12345678910111213141516Aruba2930F#config t 進入config模式Aruba2930F#system-view 進入config模式Aruba2930F(conf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Aruba Switch 基礎指令">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/02/06/Aruba-Switch-%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="前言去年底的時候因為換工作的關係，現在的公司絕大多數的設備都是Aruba的Switch，因此為了方便查詢，把一些常見到的指令做了一些整理  Aruba switch 2930F 基礎指令1.基本操作12345678910111213141516Aruba2930F#config t 進入config模式Aruba2930F#system-view 進入config模式Aruba2930F(conf">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/02/06/Aruba-Switch-%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4/covers/Kuro_Hayakawa_animegirl_side_perspective_snowy_abstract_colorfu_182fd429-1b0f-46cd-bd5d-0acbb2c7aa97.png">
+<meta property="article:published_time" content="2024-02-06T15:34:07.000Z">
+<meta property="article:modified_time" content="2024-02-06T16:36:33.032Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="Switch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/02/06/Aruba-Switch-%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4/covers/Kuro_Hayakawa_animegirl_side_perspective_snowy_abstract_colorfu_182fd429-1b0f-46cd-bd5d-0acbb2c7aa97.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/1.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/stelliva4.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是 Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Device/">
+                Device
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Monitor/">
+                Monitor
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">4</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">14 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/02/07/Python-%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-Part-2/" title="Python 自動化備份 Part-2" >
+            <div class="recent-link-text">
+              Python 自動化備份 Part-2
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/06/Aruba-Switch-%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4/" title="Aruba Switch 基礎指令" >
+            <div class="recent-link-text">
+              Aruba Switch 基礎指令
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/" title="Fortinet VPN新增Google Auth身分證驗(第二篇)" >
+            <div class="recent-link-text">
+              Fortinet VPN新增Google Auth身分證驗(第二篇)
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/23/Centos-7-Nginx%E5%AE%89%E8%A3%9D%E3%80%81%E8%A8%AD%E5%AE%9A%E8%88%87%E7%B3%BB%E7%B5%B1%E8%AA%BF%E6%A0%A1/" title="Centos 7 Nginx安裝、設定與系統調校" >
+            <div class="recent-link-text">
+              Centos 7 Nginx安裝、設定與系統調校
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/08/22/Grafana-Loki-Promtail-%E6%B7%BA%E8%AB%87%E5%B0%8F%E7%8E%A9/" title="Grafana + Loki + Promtail 淺談小玩" >
+            <div class="recent-link-text">
+              Grafana + Loki + Promtail 淺談小玩
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Aruba-Switch-基礎指令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_clsalojbr0001lwv4ex171fyu">
+        <img src="/covers/Kuro_Hayakawa_animegirl_side_perspective_snowy_abstract_colorfu_182fd429-1b0f-46cd-bd5d-0acbb2c7aa97.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Aruba Switch 基礎指令
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-02-06T15:34:07.000Z" itemprop="datePublished">2024-02-06</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Device/">Device</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.3k 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>去年底的時候因為換工作的關係，現在的公司絕大多數的設備都是Aruba的Switch，因此為了方便查詢，把一些常見到的指令做了一些整理</p>
+<h2 id="Aruba-switch-2930F-基礎指令"><a href="#Aruba-switch-2930F-基礎指令" class="headerlink" title=" Aruba switch 2930F 基礎指令"></a><center> Aruba switch 2930F 基礎指令</center></h2><h3 id="1-基本操作"><a href="#1-基本操作" class="headerlink" title="1.基本操作"></a>1.基本操作</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Aruba2930F<span class="meta">#config t 進入config模式</span></span><br><span class="line">Aruba2930F<span class="meta">#system-view 進入config模式</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#save 存檔</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#quit 返回上一層</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#ping 送出ICMP封包</span></span><br><span class="line">Aruba2930F<span class="meta">#reboot 重開機</span></span><br><span class="line">Aruba2930F<span class="meta">#reset saved-configuration 清除設定檔(reset)</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#menu 進入管理模式 &lt;-非常方便的模式，可以做os的升級</span></span><br><span class="line">Aruba2930F<span class="meta">#show version 檢視版本</span></span><br><span class="line">Aruba2930F<span class="meta">#show system information 檢視系統資訊</span></span><br><span class="line">Aruba2930F<span class="meta">#show run 檢視config</span></span><br><span class="line">Aruba2930F<span class="meta">#display cur 檢視config</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#sysname XXX 變更顯示名稱</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#no XXXXX 移除指令</span></span><br><span class="line">Aruba2930F(confif)<span class="meta">#undo XXXXX 移除指令</span></span><br><span class="line">Aruba2920<span class="meta"># copy startup-config tftp 192.168.1.1 statupconfig 拷貝startup-config</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-設定Vlan-IP與Gateway"><a href="#2-設定Vlan-IP與Gateway" class="headerlink" title="2.設定Vlan IP與Gateway"></a>2.設定Vlan IP與Gateway</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Aruba2930F(config)<span class="meta">#vlan 1 進入 vlan 1</span></span><br><span class="line">Aruba2930F(vlan<span class="number">-1</span>)<span class="meta"># ip address 192.168.1.1 255.255.255.0 設定IP</span></span><br><span class="line">Aruba2930F(config)<span class="meta"># ip route 0.0.0.0 0.0.0.0 192.168.1.254 設定defaut route</span></span><br><span class="line">Aruba2930F(config)<span class="meta"># vlan 20 創造vlan20</span></span><br><span class="line">Aruba2930F(config)<span class="meta"># vlan 20-100 創造vlan 20~100</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-讓Interface帶tagged-or-untagged"><a href="#3-讓Interface帶tagged-or-untagged" class="headerlink" title="3.讓Interface帶tagged or untagged"></a>3.讓Interface帶tagged or untagged</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Aruba2930F(config)<span class="meta"># interface ethernet 1/1 進入端口</span></span><br><span class="line">Aruba2930F(eth<span class="number">-1</span>/<span class="number">1</span>)<span class="meta"># untagged vlan 1 讓此端口untagged vlan 1</span></span><br><span class="line">Aruba2930F(eth<span class="number">-1</span>/<span class="number">1</span>)<span class="meta"># tagged vlan 1 讓此端口tagged vlan 1 </span></span><br><span class="line">Aruba2930F(config)<span class="meta">#interface ethernet all 進入全部端口</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-NTP"><a href="#4-NTP" class="headerlink" title="4.NTP"></a>4.NTP</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Aruba2930F(config)<span class="meta">#display clock 顯示時間</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#npt server 192.168.1.50 設定NTP server</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#npt server 192.168.1.50 iburst 加速同步模式</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#npt enable 啟用NTP</span></span><br><span class="line">Aruba2930F(config)<span class="meta"># time time zone 480 設定時區台灣時區+8 (*60=480)</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#timesync ntp 改變timesync mode成ntp</span></span><br><span class="line"></span><br><span class="line">Aruba2930F(config)<span class="meta">#show time顯示switch 當前的時間</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#show ntp status顯示NTP的狀態</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#time  設定時間，依循格式 MM/DD/YY or HH/MM/SS</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-Etherchannel-LACP-and-Trunk"><a href="#5-Etherchannel-LACP-and-Trunk" class="headerlink" title="5.Etherchannel (LACP and Trunk)"></a>5.Etherchannel (LACP and Trunk)</h3><p>EtherChannel是將多個實體介面綁在一個虛擬的port上，藉此達到高容錯與增加頻寬的一種技術。<br><br>在Aruba OS裡，有兩種設定方式，分別是<strong>trunk(Static)<strong>、</strong>LACP</strong></p>
+<p><em>ps:在此處的trunk只是Aruba OS對於綑綁端口技術的一種稱呼方式，與一般將Vlan帶上tag的trunk並無關係</em></p>
+<ul>
+<li><p><strong>Dynamic LACP(動態)的設定方式如下：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(config)<span class="meta"># interface ethernet 1 lacp active</span></span><br><span class="line">或是</span><br><span class="line">(config)<span class="meta"># interface ethernet 1 lacp passive </span></span><br><span class="line">或是</span><br><span class="line">(config)<span class="meta"># interface ethernet 1 lacp static passive/active</span></span><br><span class="line">設定lacp的模式 一般都是active 主動模式</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Static LACP(靜態)的設定方式如下</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(config)# Trunk ethernet <span class="number">1</span> trk1 <span class="title function_">lacp</span></span><br><span class="line"><span class="params">(config)</span># Trunk ethernet 2 trk1 lacp </span><br><span class="line">將port 1, port 2綁入虛擬port trk1中</span><br><span class="line"><span class="params">(config)</span><span class="meta"># interface trk1 進入trk1</span></span><br><span class="line">之後就可以在虛擬port trk上做一般的port設定 <span class="params">(Ex. vlan)</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>trunk的設定方式如下</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(config)# Trunk ethernet <span class="number">1</span> trk1 <span class="title function_">trunk</span></span><br><span class="line"><span class="params">(config)</span># Trunk ethernet 2 trk1 trunk</span><br><span class="line">將port1, port2 綁入虛擬port trk1中</span><br><span class="line"><span class="params">(config)</span><span class="meta"># interface trk1 進入trk1</span></span><br><span class="line">之後就可以在虛擬port trk上做一般的port設定 <span class="params">(Ex. vlan)</span></span><br></pre></td></tr></table></figure>
+<p><strong>PS:<br>可以使用#Trunk 1-2&#x2F;all trk1的方式來綁入複數的端口<br>若只輸入#Trunk ethernet 1-2 trk，沒有指定要用trunk或是lacp來綑綁的話，預設是使用trunk來綑綁</strong></p>
+</li>
+</ul>
+<h3 id="檢視ether-channel的設定"><a href="#檢視ether-channel的設定" class="headerlink" title="檢視ether channel的設定"></a>檢視ether channel的設定</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show trunks</span><br><span class="line">show lacp peer</span><br><span class="line">show lacp </span><br><span class="line">show lacp local</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-STP"><a href="#6-STP" class="headerlink" title="6.STP"></a>6.STP</h2><p>一般2930F的Spanning Tree預設是關閉的,需要啟動才能使用<br>Aruba OS預設的STP是MSTP( Multiple STP )，同時也支援RSTP與RPVST(Rapid  Per-vlan STP)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">(config)<span class="meta"># spanning-tree enable #啟用STP</span></span><br><span class="line">(config)<span class="meta"># spanning-tree mode mstp</span></span><br><span class="line">或是</span><br><span class="line">(config)<span class="meta"># spanning-tree mode rapid-pvst</span></span><br><span class="line">選擇 spanning tree的模式 預設啟用是mstp,若對接的設備支援rapid-pvst，可切換成RPVST</span><br><span class="line">(config)<span class="meta"># spanning-tree priority 0-15 調整priority(0*4096-15*4096)</span></span><br><span class="line">(config)<span class="meta"># spanning-tree root primary 調整primary or seconary</span></span><br><span class="line">可以設定該spanning的priority決定是否來當root或是backup</span><br><span class="line"> </span><br><span class="line">啟用edge-port，省略當介接到非<span class="keyword">switch</span>的設備時，所進行不必要的收斂運算</span><br><span class="line">(config)<span class="meta"># spanning-tree ethernet all auto-edge-port</span></span><br><span class="line">此為啟用所有PORT為<span class="keyword">auto</span>-edge-port. port會聆聽<span class="number">3</span>秒的BPDU封包, 若<span class="number">3</span>秒內沒有任何的BPDU封包,將會變成edge-port.若有則不會</span><br><span class="line">(config)<span class="meta"># spanning-tree ethernet all admin-edge-port</span></span><br><span class="line">直接把所有port改成edge-port</span><br><span class="line"></span><br><span class="line"><span class="meta"># show spanning-tree</span></span><br><span class="line">顯示spanning-tree是否有啟動,使用的模式為何</span><br><span class="line"><span class="meta"># show spanning-tree config</span></span><br><span class="line">顯示spanning-tree較詳細的設定</span><br><span class="line"></span><br><span class="line">Spanning Tree - BPDU Protection</span><br><span class="line"></span><br><span class="line">當端口啟用了BPDU-Protction後，如果接收到spanning-tree所發出的BPDU封包，會將端口disable掉</span><br><span class="line"></span><br><span class="line">(config)<span class="meta"># spanning-tree ethernet all bpdu-protection</span></span><br><span class="line">在所有的port上啟用bpdu protection</span><br><span class="line"><span class="meta"># show spanning-tree bpdu-protection</span></span><br><span class="line">檢視bpdu-protection的情況</span><br><span class="line">PS:STP要是Enable的狀態底下，BPDU Protection才有作用，無法單純啟用BPDU Protection</span><br><span class="line"></span><br><span class="line">備註:</span><br><span class="line"><span class="meta">#spanning-tree bpdu-throttle 64-254 </span></span><br><span class="line">限制每秒送到Switch的CPU的BPDU封包數量，預防<span class="keyword">switch</span>的CPU因為loop而高速運轉</span><br><span class="line"><span class="meta"># spanning-tree bpdu-protection-timeout</span></span><br><span class="line">修改BPDU-protection發生作用時，disable端口的時間，單位是秒，如果設定零是永遠disable</span><br></pre></td></tr></table></figure>
+<h2 id="7-Telnet-SSH"><a href="#7-Telnet-SSH" class="headerlink" title="7.Telnet &amp; SSH"></a>7.Telnet &amp; SSH</h2><ul>
+<li>1.Telnet</li>
+</ul>
+<p>Aruba OS的telnet預設是啟用的，遠端使用Telnet連線之後，可以直接敲Enter進入<br>可以透過設定使用者帳號來讓Telnet必須用帳號密碼登入</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用password指令來設定使用者帳號</span><br><span class="line"><span class="meta">#password  manager/operator(指定權限) user-name XXX(設定帳號) plaintext XXX(設定密碼)</span></span><br><span class="line">新增一個帳號admin密碼admin的maneger指令如下，</span><br><span class="line"><span class="meta">#password manager user-name admin plaintext admin</span></span><br><span class="line">如果不指定user-name，便會使用manager與operator當作預設的帳號</span><br><span class="line"><span class="meta">#password manager plaintext admin</span></span><br></pre></td></tr></table></figure>
+<p>新增的帳號可以用來登入Telnet、SSH<br>可以使用#show telnet來檢視telnet的狀態</p>
+<ul>
+<li>2.SSH</li>
+</ul>
+<p>產生SSH的金鑰</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">後面可以選擇用dsa或是rsa加密，選定之後可以再選擇位元長度(optional)</span><br><span class="line">如果不想指定的話</span><br><span class="line"><span class="meta">#crypto key generate ssh rsa</span></span><br><span class="line">就可以產生</span><br></pre></td></tr></table></figure>
+<p>啟用SSH</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">檢視SSH的狀態</span><br><span class="line"><span class="meta">#show ip ssh</span></span><br></pre></td></tr></table></figure>
+<p><em>SSH也需要設定帳號密碼才能夠連入，請參考Telnet的部份創造帳號密碼</em></p>
+<h2 id="8-關於log"><a href="#8-關於log" class="headerlink" title="8.關於log"></a>8.關於log</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Aruba2930F<span class="meta">#show logging 檢視log 可以附加參數做過濾</span></span><br><span class="line">Aruba2930F<span class="meta">#log 檢視log 可以附加參數做過濾</span></span><br><span class="line">Aruba2930F(config)<span class="meta">#logging command 使用指令開啟log紀錄指令的功能</span></span><br><span class="line"></span><br><span class="line">-a</span><br><span class="line">顯示全部的<span class="built_in">log</span></span><br><span class="line">-b</span><br><span class="line">顯示<span class="built_in">log</span>，但是用開機到現在的排列方式來取代原本的時間排列方式</span><br><span class="line">-r</span><br><span class="line">顯示<span class="built_in">log</span>，但是最近的先顯示(最近的顯示在最上面)</span><br><span class="line">-s</span><br><span class="line">顯示commander <span class="built_in">log</span>與standby commander <span class="title function_">log</span></span><br><span class="line"><span class="params">(做stacking的時候主要那台是commander，次要的是standby)</span></span><br><span class="line">-t</span><br><span class="line">顯示<span class="built_in">log</span>，時間的最小單位改為百分之一秒</span><br><span class="line">command</span><br><span class="line">顯示輸入的指令的<span class="built_in">log</span></span><br><span class="line">-m</span><br><span class="line">顯示主要事件的<span class="built_in">log</span></span><br><span class="line">-e</span><br><span class="line">顯示錯誤<span class="params">(error)</span>事件的<span class="built_in">log</span></span><br><span class="line">-p</span><br><span class="line">顯示performance的<span class="built_in">log</span></span><br><span class="line">-w</span><br><span class="line">顯示警告訊息<span class="params">(warning)</span>的<span class="built_in">log</span></span><br><span class="line">-i</span><br><span class="line">顯示information的<span class="built_in">log</span></span><br><span class="line">-d</span><br><span class="line">顯示Debug的<span class="built_in">log</span></span><br><span class="line">option-str</span><br><span class="line">自定義要搜尋的字詞，像是輸入vlan會顯示訊息帶有vlan的<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">Aruba2930F</span><span class="params">(config)</span><span class="meta"># logging XXX.XXX.XXX.XXX 將log丟到log server</span></span><br><span class="line"><span class="title function_">Aruba2930F</span><span class="params">(config)</span><span class="meta">#logging severity major/<span class="keyword">error</span>/<span class="keyword">warning</span>/info/debug指定送出的log類型</span></span><br><span class="line"><span class="title function_">Aruba2930F</span><span class="params">(config)</span><span class="meta">#logging filter 過濾掉不想要送的log</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-DHCP"><a href="#9-DHCP" class="headerlink" title="9.DHCP"></a>9.DHCP</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Aruba2920(config)<span class="meta"># dhcp-server pool 1 進入DHCP pool 1 </span></span><br><span class="line">Aruba2920(<span class="number">1</span>)<span class="meta"># network 192.168.10.0 255.255.255.0 要發的網段</span></span><br><span class="line">Aruba2920(<span class="number">1</span>)<span class="meta"># dns-server 8.8.8.8 設定DNS server</span></span><br><span class="line">Aruba2920(<span class="number">1</span>)<span class="meta"># domain-name 設定domain name</span></span><br><span class="line">Aruba2920(<span class="number">1</span>)<span class="meta"># range 192.168.10.10 192.168.10.50 設定range</span></span><br><span class="line">Aruba2920(<span class="number">1</span>)<span class="meta"># default-router 192.168.10.254 設定default route</span></span><br><span class="line">Aruba2920(vlan<span class="number">-10</span>)<span class="meta"># dhcp-server enable</span></span><br><span class="line"></span><br><span class="line">DHCP relay</span><br><span class="line"><span class="meta">#vlan X進入vlanX</span></span><br><span class="line">(vlanX)<span class="meta">#ip helper-address 9.9.9.9 </span></span><br><span class="line">為此vlan指定DHCP server</span><br><span class="line"></span><br><span class="line">DHCP snooping </span><br><span class="line">啟用之後會只接受設定的port或server傳來的DHCP封包，其他來源的DHCP封包會drop掉</span><br><span class="line"><span class="meta">#dhcp-snooping </span></span><br><span class="line">啟用dhcp-snooping</span><br><span class="line"></span><br><span class="line"><span class="meta">#dhcp-snooping trust ethernet 24 </span></span><br><span class="line">信任port24傳來的dhcp封包</span><br><span class="line"></span><br><span class="line"><span class="meta">#dhcp-snooping authorized-server 192.168.100.10 </span></span><br><span class="line">信任特定DHCP <span class="title function_">server</span></span><br><span class="line"></span><br><span class="line"><span class="params">(vlan<span class="number">-1</span>)</span><span class="meta">#dhcp-snooping </span></span><br><span class="line">在vlan1裏頭啟用dhcp-snooping 或者是</span><br><span class="line"><span class="meta">#dhcp-snooping vlan 1 </span></span><br><span class="line">在vlan 1裏頭啟用dhcp-snooping</span><br><span class="line"><span class="meta">#show dhcp-snooping </span></span><br><span class="line">查詢dhcp-snooping狀態</span><br><span class="line"></span><br><span class="line">PS:如果DHCP server是DHCP agent的話，有時候會帶上DHCP option82，因為Aruba <span class="keyword">switch</span>預設會把DHCP-option82的封包drop掉，這時可以嘗試以下兩個指令關閉此功能</span><br><span class="line"><span class="meta">#dhcp-snooping option 82 untrusted-policy keep </span></span><br><span class="line">不drop掉option82，keep它</span><br><span class="line"><span class="meta">#no dhcp-snooping option 82 </span></span><br><span class="line">關閉option82</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-port-security"><a href="#10-port-security" class="headerlink" title="10. port security"></a>10. port security</h2><p>在CLI模式底下，可以使用port-security功能來設定端口安全選項與編輯安全設定，從一個或多個端口添加或刪除來自認證清單的設備。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">檢視狀態指令</span><br><span class="line"><span class="meta">#show port-security </span></span><br><span class="line">檢視所有端口的port security設定</span><br><span class="line"><span class="meta">#show port-security 1 </span></span><br><span class="line">檢視端口<span class="number">1</span>的port security設定</span><br><span class="line"><span class="meta">#show port-security intrusion-log </span></span><br><span class="line">檢視侵入的MAC <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">如何設定</span><br><span class="line">首先鍵入port-security 接著指定端口單個端口(<span class="number">1</span>)、範圍端口(<span class="number">1</span><span class="number">-5</span>)、或全部端口(all)，之後接續想要修改的設定，可以做的設定如下</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span>可以修改action來定義有設備入侵時<span class="keyword">switch</span>要執行的動作</span><br><span class="line">action參數說明</span><br><span class="line">none 預設，不會送出snmp trap</span><br><span class="line">send-alarm 會送出snmp trap</span><br><span class="line">send-disable 會送出snmp trap並disable端口 </span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>address-limit 定義允許連入設備的數量</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>mas-address設定允許連入的設備(輸入MAC)</span><br><span class="line"></span><br><span class="line"><span class="number">4.l</span>earn-mode 可以設定五種不同的學習狀態(設定port是如何學到MAC的)</span><br><span class="line">continuous  預設值，只要是接入的設備，port都學習的到mac           </span><br><span class="line"><span class="type">static</span>           設定固定的數值的已認證設備才能使用，如果沒有定義完所有的認證設備，也可以學習到接入設備的MAC，但是有固定數值的限制</span><br><span class="line">configured            不會學習，只有設定進去的mac才能使用</span><br><span class="line">port-access           <span class="number">802.1</span>x認證過的才會學習到</span><br><span class="line">limited-continuous 學習規定數量的mac</span><br><span class="line"></span><br><span class="line">範例:</span><br><span class="line"></span><br><span class="line">設定端口<span class="number">1</span>只允許一台設備連入</span><br><span class="line">port-security <span class="number">1</span> learn-mode limited-continuous address-limit <span class="number">1</span></span><br><span class="line"></span><br><span class="line">設定端口<span class="number">1</span>只允許一個特定的設備連入</span><br><span class="line">port-security <span class="number">1</span> learn-mode configured mac-address XXXXXX-XXXXXX</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-VSF"><a href="#11-VSF" class="headerlink" title="11.VSF"></a>11.VSF</h2><p>Virtual Switching Framework 是一種堆疊(stacking)技術，可以使用copper線或fibber線連接，設定好之後可以將兩台switch視為一台switch</p>
+<p>設定時，首先決定要使用1G還是10G port做VSF</p>
+<p>使用vsf port-speed修改數值(每台要做VSF的switch都要進行修改)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">接下來，先在member1上設定VSF</span><br><span class="line"><span class="title function_">VSF1</span><span class="params">(config)</span><span class="meta">#vsf member 1 link 1 1/1 (member1、link1、在port1/1做)</span></span><br><span class="line"><span class="title function_">VSF1</span><span class="params">(config)</span><span class="meta">#vsf enable domain 2 (為了預防與其他不相干的switch做出VSF，需指定domain)</span></span><br><span class="line">之後系統會要求重開，按y讓他重開</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">再來在member2上設定VSF</span><br><span class="line"><span class="title function_">VSF1</span><span class="params">(config)</span><span class="meta">#vsf member 2 link 1 2/1 (member2、link1、在port2/1做 ps:因為做完VSF，member2的port會變成2/X，所以此處使用2/X來設定)</span></span><br><span class="line"><span class="title function_">VSF1</span><span class="params">(config)</span><span class="meta">#vsf enable domain 2 </span></span><br><span class="line">之後系統會要求重開，按y讓他重開</span><br><span class="line">在開機循環完成之前接上member1的<span class="keyword">switch</span>與member2的<span class="keyword">switch</span></span><br><span class="line"></span><br><span class="line">等待開完機後，使用以下指令檢測</span><br><span class="line"></span><br><span class="line"><span class="meta">#show vsf  </span></span><br><span class="line"><span class="meta">#show vsf detail  </span></span><br><span class="line"><span class="meta">#show vsf link  </span></span><br><span class="line"><span class="meta">#show vsf link detail  </span></span><br><span class="line"><span class="meta">#show running-config </span></span><br><span class="line"></span><br><span class="line">show vsf底下的清單上要出現兩台才算成功</span><br><span class="line"></span><br><span class="line">附錄:</span><br><span class="line">添加額外的port給VSF</span><br><span class="line">VSF允許多個port被分配在同一個邏輯vsf link下</span><br><span class="line"></span><br><span class="line">1.在member 1分配port給link</span><br><span class="line"><span class="title function_">VSF1</span><span class="params">(config)</span><span class="meta">#vsf member 1 link 1 1/17</span></span><br><span class="line">2.在member 2分配port給link</span><br><span class="line"><span class="title function_">VSF2</span><span class="params">(config)</span><span class="meta">#vsf member 2 link 1 2/17</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="12-Banner"><a href="#12-Banner" class="headerlink" title="12.Banner"></a>12.Banner</h2><p>有兩種不同的Banner可以設定</p>
+<p>【exec】 使用者登入”<strong>後</strong>“會顯示，自定義內容<br><br>【motd】 使用者登入”<strong>前</strong>“會顯示，自定義內容<br><br>【last-login】 啟用之後，使用者登入”<strong>前</strong>“會顯示上一次登入資訊</p>
+<p>設定方式如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#banner exec 後接一個自定義的字元</span></span><br><span class="line">就會進入編輯模式，可以自由的輸入文字換行，按下一開始自定義的字元就會結束編輯模式</span><br><span class="line">motd 也是相同的設定方式</span><br><span class="line"></span><br><span class="line">使用指令檢視banner的狀態</span><br><span class="line"><span class="meta">#show banner exec</span></span><br><span class="line"><span class="meta">#show banner motd </span></span><br><span class="line"><span class="meta">#show banner last-login</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="13-SNMP"><a href="#13-SNMP" class="headerlink" title="13.SNMP"></a>13.SNMP</h2><p>SNMP v1&#x2F;v2設定方式如下：</p>
+<p>先設定community的數值(自定義，但必須與SNMP server相同)<br>之後有四個東西可以定義<br><br>【operator】 只接受特定受限制的MIB物件<br><br>【manager】 可以接受所有MIB物件<br><br>【restricted】 MIB變數不可以被設定，只能被讀取<br><br>【unrestricted】 MIB變數可以被設定(預設)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假裝SNMP的community為public，可以接受所有MIB物件，也可以被設定的話，指令如下</span><br><span class="line"><span class="meta">#snmp-server community public manager unrestricted </span></span><br><span class="line"></span><br><span class="line">也可以一起指定snmp server的IP與community </span><br><span class="line"><span class="meta">#snmp-server host 9.9.9.9 coummunity public</span></span><br><span class="line"></span><br><span class="line">檢視snmp指令如下</span><br><span class="line"><span class="meta">#show snmp-server</span></span><br><span class="line"><span class="meta">#display snmp-agent ?</span></span><br></pre></td></tr></table></figure>
+<h2 id="14-Port-Mirroring"><a href="#14-Port-Mirroring" class="headerlink" title="14.Port Mirroring"></a>14.Port Mirroring</h2><p>Traffic mirroring 可以將switch介面上傳送與接收的封包複製一份給local或是 remote destination，其功能就像是 traffic analyzer或者是intrusion detection system (IDS)</p>
+<p>Aruba OS裡有四個mirror群組，分別是mirror1~mirror4<br><br>設定時先將一個port綁進其中一個群組，然後再將一個介面(可以是port或是vlan)綁進這個群組，再設定是要監控流出(out)、流入(in)、或是兩者(both)的封包，之後就可以經由觀察一開始綁入的port來得知介面的封包</p>
+<p>設定指令如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#mirror 1 port 2  </span></span><br><span class="line">將port <span class="number">2</span> 綁入mirror1</span><br><span class="line"><span class="meta">#interface 1 monitor all both mirror1 </span></span><br><span class="line">指定interface <span class="number">1</span>流出與流入的封包全都複製到mirror1裡</span><br><span class="line"></span><br><span class="line">之後就可以經由觀察port2的封包來得知interface <span class="number">1</span>的封包狀態</span><br><span class="line">PS:port2的Link Status要是UP的狀態才會有封包進出的資訊</span><br><span class="line"></span><br><span class="line">檢視monitor設定</span><br><span class="line"><span class="meta">#show monitor </span></span><br><span class="line"><span class="meta">#show monitor 1 </span></span><br></pre></td></tr></table></figure>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/02/07/Python-%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-Part-2/"
+      title="Python 自動化備份 Part-2"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Python 自動化備份 Part-2
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/08/28/Fortinet-VPN%E6%96%B0%E5%A2%9EGoogle-Auth%E8%BA%AB%E5%88%86%E8%AD%89%E9%A9%97-%E7%AC%AC%E4%BA%8C%E7%AF%87/"
+      title="Fortinet VPN新增Google Auth身分證驗(第二篇)"
+     >
+
+    <p class="title-text">
+      
+        Fortinet VPN新增Google Auth身分證驗(第二篇)
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
