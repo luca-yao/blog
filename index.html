@@ -279,7 +279,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            96 詞 
+            819 詞 
           </div>
         </div>
         
@@ -290,7 +290,21 @@
         
           <div class="truncate-text">
             前言之前跟大家分享過 Python 寫的自動化備份Fortigate和Cisco Switch的語法雖然可能不見得大家會用的到，但或許有天你也會想用也說不定呢 (｢･ω･)｢主要是因為現在公司的設備種類多種，數量又多，如果因為這備份每天要花時間搞我就覺得 
-麻煩(〃∀〃)  
+麻煩(〃∀〃)於是乎 [小垃圾2號] 誕生了
+因為現在的環境比以前複雜許多，為了方便後續操作與紀錄等需求，這次搭配 Jenkins 來使用，同樣的，為了方便日後修改、控制、紀錄，做了更細的模組化處理
+所以[照理說]只要調整需要的部分照理說就可以正常運作了
+大概吧 ◝(　ﾟ∀ ﾟ )◟GitHub: https://github.com/luca-yao/NetworkDeviceBackup
+一如既往，本程式主要分成三大設定檔
+
+NetworkDeviceBackup.py
+sendmail.py
+firewall_backup.py
+switch_backup.py 
+wifi_backup.py 
+config&#x2F;*.yaml #各式yaml
+
+運行作業系統：Ubuntu 22.04 LTS
+Python版本：Py...  
           </div>
         
       </div>
