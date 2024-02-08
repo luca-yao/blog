@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/</loc>
+    
+    <lastmod>2024-02-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/2024/02/08/%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-%E7%95%AA%E5%A4%96%E7%AF%87-Logging%E5%82%99%E4%BB%BD/</loc>
     
     <lastmod>2024-02-08</lastmod>
@@ -191,14 +200,7 @@
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Switch/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -212,6 +214,13 @@
   </url>
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Switch/</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Freeredis/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -219,21 +228,21 @@
   </url>
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Ubuntu/</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Grafana/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -254,6 +263,13 @@
   </url>
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Windows/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -263,6 +279,13 @@
 
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
+    <lastmod>2024-02-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -270,7 +293,7 @@
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
+    <loc>https://luca-yao-s-blog.web.app/categories/Services/</loc>
     <lastmod>2024-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
