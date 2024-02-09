@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luca-yao-s-blog.web.app/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/</loc>
+    
+    <lastmod>2024-02-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luca-yao-s-blog.web.app/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/</loc>
     
     <lastmod>2024-02-08</lastmod>
@@ -193,85 +202,85 @@
 
   <url>
     <loc>https://luca-yao-s-blog.web.app/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Linux/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Switch/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Freeredis/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Linux/</loc>
+    <lastmod>2024-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Freeredis/</loc>
+    <lastmod>2024-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Ubuntu/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Grafana/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Loki/</loc>
-    <lastmod>2024-02-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Windows/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -279,36 +288,36 @@
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Services/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Monitor/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Coding/</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2024-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

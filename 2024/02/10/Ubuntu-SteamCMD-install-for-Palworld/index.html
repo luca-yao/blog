@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Ubuntu SteamCMD install for Palworld | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
+
+  <meta name="description" content="前言因為懶得使用Windows，想到還要花錢買系統，我就覺得麻煩，因此決定透過Ubunut來安裝SteamCMD來開一個帕魯的伺服器 根據測試來說，配置要求一點高  CPU: 4Core RAM: 16G or more Storage: 40G or more  さあ、始めましょう　(ゝ∀･)b12#更新sudo apt update &amp;&amp; apt upgrade -y  12#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu SteamCMD install for Palworld">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="前言因為懶得使用Windows，想到還要花錢買系統，我就覺得麻煩，因此決定透過Ubunut來安裝SteamCMD來開一個帕魯的伺服器 根據測試來說，配置要求一點高  CPU: 4Core RAM: 16G or more Storage: 40G or more  さあ、始めましょう　(ゝ∀･)b12#更新sudo apt update &amp;&amp; apt upgrade -y  12#">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/covers/boatonlake_penguine_dragoon_robot__in_game__3d_render_hand_pain_db0a41ad-be4d-46c0-9160-6b3009401e0e.png">
+<meta property="article:published_time" content="2024-02-09T16:10:31.000Z">
+<meta property="article:modified_time" content="2024-02-09T16:46:23.029Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/covers/boatonlake_penguine_dragoon_robot__in_game__3d_render_hand_pain_db0a41ad-be4d-46c0-9160-6b3009401e0e.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/1.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/stelliva4.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是 Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Device/">
+                Device
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Services/">
+                Services
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Monitor/">
+                Monitor
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">5</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">14 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/" title="Ubuntu SteamCMD install for Palworld" >
+            <div class="recent-link-text">
+              Ubuntu SteamCMD install for Palworld
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/" title="Gogs + Jenkins 搭建自動化部屬平台" >
+            <div class="recent-link-text">
+              Gogs + Jenkins 搭建自動化部屬平台
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/08/%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-%E7%95%AA%E5%A4%96%E7%AF%87-Logging%E5%82%99%E4%BB%BD/" title="自動化備份 番外篇 Logging備份" >
+            <div class="recent-link-text">
+              自動化備份 番外篇 Logging備份
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/07/Python-%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-Part-2/" title="Python 自動化備份 Part-2" >
+            <div class="recent-link-text">
+              Python 自動化備份 Part-2
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/06/Aruba-Switch-%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4/" title="Aruba Switch 基礎指令" >
+            <div class="recent-link-text">
+              Aruba Switch 基礎指令
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-Ubuntu-SteamCMD-install-for-Palworld" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_clsevqt72000z2cv459tmhun0">
+        <img src="/covers/boatonlake_penguine_dragoon_robot__in_game__3d_render_hand_pain_db0a41ad-be4d-46c0-9160-6b3009401e0e.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Ubuntu SteamCMD install for Palworld
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-02-09T16:10:31.000Z" itemprop="datePublished">2024-02-10</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Services/">Services</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            603 詞 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因為懶得使用Windows，想到還要花錢買系統，我就覺得麻煩，因此決定透過Ubunut來安裝SteamCMD來開一個帕魯的伺服器</p>
+<p>根據測試來說，配置要求一點高</p>
+<ul>
+<li>CPU: 4Core</li>
+<li>RAM: 16G or more</li>
+<li>Storage: 40G or more</li>
+</ul>
+<h2 id="さあ、始めましょう-ゝ∀･-b"><a href="#さあ、始めましょう-ゝ∀･-b" class="headerlink" title="さあ、始めましょう　(ゝ∀･)b"></a>さあ、始めましょう　(ゝ∀･)b</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#更新</span></span><br><span class="line">sudo apt update &amp;&amp; apt upgrade -y</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安裝 software-properties-common</span></span><br><span class="line">sudo apt install software-properties-common</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#準備與安裝SteamCMD</span></span><br><span class="line">sudo dpkg --add-architecture i386 | sudo add-apt-repository multiverse ; apt update ; apt install steamcmd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#新增使用者</span></span><br><span class="line">sudo useradd -m steam</span><br></pre></td></tr></table></figure>
+
+<p>之後要去調整一下環境變數，免得啟動發生異常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /home/steam/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#找個地方新增</span></span><br><span class="line">export PATH=<span class="string">&quot;/usr/games/:$PATH&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>切換使用者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u steam -s ; cd ~</span><br></pre></td></tr></table></figure>
+
+<p>下載 Steamworks SDK 可再發行元件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steamcmd +force_install_dir &#x27;/home/steam/Steam/steamapps/common/steamworks&#x27; +login anonymous +app_update 1007 +quit</span><br></pre></td></tr></table></figure>
+<p>建立一個目錄，Palworld 伺服器將在其中尋找「steamclient.so」檔案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/steam/.steam/sdk64</span><br></pre></td></tr></table></figure>
+<p>複製steamclient.so</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp &#x27;/home/steam/Steam/steamapps/common/steamworks/linux64/steamclient.so&#x27; /home/steam/.steam/sdk64/</span><br></pre></td></tr></table></figure>
+<p>下載Palworld伺服器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">steamcmd +force_install_dir &#x27;/home/steam/Steam/steamapps/common/PalServer&#x27; +login anonymous +app_update 2394010 validate +quit</span><br></pre></td></tr></table></figure>
+
+<p>測試啟動</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/steam/Steam/steamapps/common/PalServer</span><br><span class="line">./PalServer.sh</span><br></pre></td></tr></table></figure>
+<p>會跑很多訊息主要看到這行就代表成功開開啟了<br><BR>[S_API FAIL] Tried to access Steam interface SteamNetworkingUtils004 before SteamAPI_Init succeeded.</p>
+<p>之後按下 CTRL + C 退出。</p>
+<p>把預設值複製到運行伺服器用，裡面有許多設定可以使用，詳細設定可以<a target="_blank" rel="noopener" href="https://tech.palworldgame.com/optimize-game-balance">參考官方</a>資訊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /home/steam/Steam/steamapps/common/PalServer/DefaultPalWorldSettings.ini /home/steam/Steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini</span><br></pre></td></tr></table></figure>
+
+<h1 id="開機自動啟動"><a href="#開機自動啟動" class="headerlink" title="開機自動啟動"></a>開機自動啟動</h1><p>編寫執行系統</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/system/palworld.service</span><br><span class="line"></span><br><span class="line"><span class="comment">#Systemd內容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Palworld Server</span><br><span class="line">Wants=network-online.target</span><br><span class="line">After=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=steam</span><br><span class="line">Group=steam</span><br><span class="line">WorkingDirectory=/home/steam/</span><br><span class="line">ExecStartPre=/usr/games/steamcmd +force_install_dir <span class="string">&#x27;/home/steam/Steam/steamapps/common/PalServer&#x27;</span> +login anonymous +app_update <span class="number">2394010</span> +quit</span><br><span class="line">ExecStart=/home/steam/Steam/steamapps/common/PalServer/PalServer.sh -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS &gt; /dev/null</span><br><span class="line">Restart=always</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>官方推薦再開啟伺服器的時候附帶以下參數：</p>
+<ul>
+<li>-useperfthreads  <h6 id="這是一個虛幻引擎選項，告訴引擎使用線程來嘗試提高效能。"><a href="#這是一個虛幻引擎選項，告訴引擎使用線程來嘗試提高效能。" class="headerlink" title="這是一個虛幻引擎選項，告訴引擎使用線程來嘗試提高效能。"></a>這是一個虛幻引擎選項，告訴引擎使用線程來嘗試提高效能。</h6></li>
+<li>-NoAsyncLoadingThread<h6 id="使用這個，我們告訴伺服器不要使用使用者單獨的執行緒進行非同步載入。這樣做是為了減少運行線程的數量並提高伺服器的效能。"><a href="#使用這個，我們告訴伺服器不要使用使用者單獨的執行緒進行非同步載入。這樣做是為了減少運行線程的數量並提高伺服器的效能。" class="headerlink" title="使用這個，我們告訴伺服器不要使用使用者單獨的執行緒進行非同步載入。這樣做是為了減少運行線程的數量並提高伺服器的效能。"></a>使用這個，我們告訴伺服器不要使用使用者單獨的執行緒進行非同步載入。這樣做是為了減少運行線程的數量並提高伺服器的效能。</h6></li>
+<li>-UseMultithreadForDS<h6 id="最後一個選項是一個簡單的選項，告訴引擎為專用伺服器使用多執行緒。"><a href="#最後一個選項是一個簡單的選項，告訴引擎為專用伺服器使用多執行緒。" class="headerlink" title="最後一個選項是一個簡單的選項，告訴引擎為專用伺服器使用多執行緒。"></a>最後一個選項是一個簡單的選項，告訴引擎為專用伺服器使用多執行緒。</h6></li>
+</ul>
+<h2 id="設定自動啟動"><a href="#設定自動啟動" class="headerlink" title="設定自動啟動"></a>設定自動啟動</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable palworld ; sudo systemctl start palworld  </span><br></pre></td></tr></table></figure>
+
+<h1 id="搞定啦-可以開始完啦-ゝ∀･"><a href="#搞定啦-可以開始完啦-ゝ∀･" class="headerlink" title="搞定啦~~可以開始完啦 (ゝ∀･)"></a>搞定啦~~可以開始完啦 (ゝ∀･)</h1>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/"
+      title="Gogs + Jenkins 搭建自動化部屬平台"
+     >
+
+    <p class="title-text">
+      
+        Gogs + Jenkins 搭建自動化部屬平台
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
