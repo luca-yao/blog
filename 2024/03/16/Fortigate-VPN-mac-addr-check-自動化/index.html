@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>Fortigate VPN mac-addr-check 自動化 | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
+
+  <meta name="description" content="前言目前公司因為資訊安全性考量，所以在Fortigate的VPN開啟了 mac-addr-check 的功能，畢竟不能限制VPN連線來源，透過帳號控管仍有很高的風險  肯定一堆人密碼是 a12345或者password10元買帳號(・∀・)つ⑩   程序思維講解因為公司大老們，異想天開的想要透過MAC管理使用者登入設備以外，還想要透過&#x2F;日期來自動開關VPN權限&#x2F;，所以我在清單中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fortigate VPN mac-addr-check 自動化">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/03/16/Fortigate-VPN-mac-addr-check-%E8%87%AA%E5%8B%95%E5%8C%96/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="前言目前公司因為資訊安全性考量，所以在Fortigate的VPN開啟了 mac-addr-check 的功能，畢竟不能限制VPN連線來源，透過帳號控管仍有很高的風險  肯定一堆人密碼是 a12345或者password10元買帳號(・∀・)つ⑩   程序思維講解因為公司大老們，異想天開的想要透過MAC管理使用者登入設備以外，還想要透過&#x2F;日期來自動開關VPN權限&#x2F;，所以我在清單中">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/03/16/Fortigate-VPN-mac-addr-check-%E8%87%AA%E5%8B%95%E5%8C%96/covers/yazu_anthro_furry_wide_hips_fangs_claws_tail_glowing_red_eyes__b9540b61-7f9d-4ce4-8755-2d91d2e84e54.png">
+<meta property="article:published_time" content="2024-03-16T04:34:25.000Z">
+<meta property="article:modified_time" content="2024-03-16T06:08:59.412Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="Fortigate">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/03/16/Fortigate-VPN-mac-addr-check-%E8%87%AA%E5%8B%95%E5%8C%96/covers/yazu_anthro_furry_wide_hips_fangs_claws_tail_glowing_red_eyes__b9540b61-7f9d-4ce4-8755-2d91d2e84e54.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/1.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/stelliva4.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是 Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Device/">
+                Device
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Services/">
+                Services
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Monitor/">
+                Monitor
+                <div class="category-count">6</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">14 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/03/16/Fortigate-VPN-mac-addr-check-%E8%87%AA%E5%8B%95%E5%8C%96/" title="Fortigate VPN mac-addr-check 自動化" >
+            <div class="recent-link-text">
+              Fortigate VPN mac-addr-check 自動化
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/" title="Ubuntu SteamCMD install for Palworld" >
+            <div class="recent-link-text">
+              Ubuntu SteamCMD install for Palworld
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/" title="Gogs + Jenkins 搭建自動化部屬平台" >
+            <div class="recent-link-text">
+              Gogs + Jenkins 搭建自動化部屬平台
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/08/%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-%E7%95%AA%E5%A4%96%E7%AF%87-Logging%E5%82%99%E4%BB%BD/" title="自動化備份 番外篇 Logging備份" >
+            <div class="recent-link-text">
+              自動化備份 番外篇 Logging備份
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/02/07/Python-%E8%87%AA%E5%8B%95%E5%8C%96%E5%82%99%E4%BB%BD-Part-2/" title="Python 自動化備份 Part-2" >
+            <div class="recent-link-text">
+              Python 自動化備份 Part-2
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+      
+
+  <article id="post-Fortigate-VPN-mac-addr-check-自動化" class="h-entry article article-type-post"
+    itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    
+      
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_clttou38e0008dov4gz8143wq">
+        <img src="/covers/yazu_anthro_furry_wide_hips_fangs_claws_tail_glowing_red_eyes__b9540b61-7f9d-4ce4-8755-2d91d2e84e54.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+        
+          <div class="article-inner">
+            <div class="article-main">
+              <header class="article-header">
+                
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Fortigate VPN mac-addr-check 自動化
+      </h1>
+    
+  
+</div>
+
+                  <div class='meta-info-bar'>
+                    <div class="meta-info">
+  <time class="dt-published" datetime="2024-03-16T04:34:25.000Z" itemprop="datePublished">2024-03-16</time>
+</div>
+                      <div class="need-seperator meta-info">
+                        <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Coding/">Coding</a>
+   
+</div>
+
+                      </div>
+                      <div class="wordcount need-seperator meta-info">
+                        960 詞
+                      </div>
+                  </div>
+                  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+              </header>
+              <div class="e-content article-entry" itemprop="articleBody">
+                
+                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前公司因為資訊安全性考量，所以在Fortigate的VPN開啟了 mac-addr-check 的功能，畢竟不能限制VPN連線來源，透過帳號控管仍有很高的風險</p>
+<blockquote>
+<p>肯定一堆人密碼是 a12345或者password<br><br>10元買帳號(・∀・)つ⑩ </p>
+</blockquote>
+<h2 id="程序思維講解"><a href="#程序思維講解" class="headerlink" title="程序思維講解"></a>程序思維講解</h2><p>因為公司大老們，異想天開的想要透過MAC管理使用者登入設備以外，還想要透過&#x2F;<strong>日期來自動開關VPN權限</strong>&#x2F;，所以我在清單中除了新增設備的MAC位址以外，還添加了 開始日期(start_time) 與 結束日期 (end_time) ，再透過CI&#x2F;CD程序(我自己是用Jenkins)來進行自動化管理。</p>
+<p>思緒是這樣的，如果公司只有50個人雖然要花一點時間，但也不算辦不到<br><BR>假設公司有100人，也不是真的辦不到，但要花很多時間去處理，假設今天公司有300人呢?1000人呢?<br><BR>總不能還是一個一個加吧? 並且還會發生硬體設備更新或故障更換的問題。<br><BR>況且如果跟我一樣碰上喜歡作夢的老先生，除了想辦法做以外，你還真不知道可以怎麼做呢。<br><BR>光想到我要去記每一個使用者的申請日期和時間，我就想<del>辭職</del>了。</p>
+<blockquote>
+<p>於是 “科技來自於人性，人性來自於惰性” (　˙灬˙　)</p>
+</blockquote>
+<hr>
+<p>懶惰鬼的我想到，不如就透過’Netmiko’來幫我處理吧<br><br />本次套件的樹狀結構如下：</p>
+<ul>
+<li>SSL-VPN<ul>
+<li>List<ul>
+<li>部門名稱  ※Client清單</li>
+</ul>
+</li>
+<li>Firewall-sslvpn.py ※主程式</li>
+<li>mac_list.py  ※讀取&#x2F;寫入 檔案</li>
+<li>mail_sender.py  ※信件寄送</li>
+</ul>
+</li>
+</ul>
+<p>老樣子還是把一些功能拆出來模組化了，模組化的好處是當初問題比較好排除，也更好調整</p>
+<p>這只是我自己的習慣啦，如果想要全部擠在一個上面也可以。(ゝ∀･)<br>by the way, let’s go!</p>
+<h2 id="講主程式之前，咱們先來講講，比主程式更重要也修改更多的部門清單吧"><a href="#講主程式之前，咱們先來講講，比主程式更重要也修改更多的部門清單吧" class="headerlink" title="講主程式之前，咱們先來講講，比主程式更重要也修改更多的部門清單吧!"></a>講主程式之前，咱們先來講講，比主程式更重要也修改更多的部門清單吧!</h2><p>List&#x2F;MIS  ※本次以MIS舉例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- USER: luca_yao</span><br><span class="line">  WIFI: a4:cc:ee:aa:00:01  #Wifi MAC</span><br><span class="line">  WIRED: a4:cc:ee:aa:00:01 #有線 MAC</span><br><span class="line">  START_TIME: 01-01        #開始時間</span><br><span class="line">  END_TIME: 06-30          #結束時間</span><br><span class="line"></span><br><span class="line">- USER: Joanna_wang</span><br><span class="line">  WIFI: aa:bb:33:d3:qq:01</span><br><span class="line">  WIRED: da:a9:11:23:22:ea</span><br><span class="line">  START_TIME: 02-02</span><br><span class="line">  END_TIME: 02-12</span><br></pre></td></tr></table></figure>
+
+<h2 id="Firewall-sslvpn-py"><a href="#Firewall-sslvpn-py" class="headerlink" title="Firewall-sslvpn.py"></a>Firewall-sslvpn.py</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"># Editer : Luca_yao</span><br><span class="line"># E-mail : stelliva42@gmail.com</span><br><span class="line"># Date : 2024/02/06</span><br><span class="line"></span><br><span class="line">import os, re</span><br><span class="line">from netmiko import ConnectHandler</span><br><span class="line">from mac_list import main</span><br><span class="line"></span><br><span class="line">def connect_to_fortigate(device_info):</span><br><span class="line">    try:</span><br><span class="line">        log_file_path = f&quot;netmiko.log&quot;</span><br><span class="line">        net_connect = ConnectHandler(**device_info, session_log=log_file_path)</span><br><span class="line">        print(&quot;Connected to FortiGate device&quot;)</span><br><span class="line">        return net_connect</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(f&quot;Error connecting to FortiGate: &#123;e&#125;&quot;)</span><br><span class="line">        return None</span><br><span class="line"></span><br><span class="line">def configure_sslvpn_portal(net_connect, portal_name, mac_addr_list):</span><br><span class="line">    try:</span><br><span class="line">        commands = [</span><br><span class="line">            &#x27;config vpn ssl web portal&#x27;,</span><br><span class="line">            f&#x27;edit &#123;portal_name&#125;&#x27;,</span><br><span class="line">            &#x27;config mac-addr-check-rule&#x27;,</span><br><span class="line">            f&#x27;edit &quot;VPN_&#123;file_name&#125;&quot;&#x27;,</span><br><span class="line">            f&#x27;set mac-addr-list &#123;mac_addr_list&#125;&#x27;,</span><br><span class="line">            &#x27;show&#x27;,</span><br><span class="line">            &#x27;next&#x27;,  </span><br><span class="line">            &#x27;end&#x27;,   </span><br><span class="line">        ]</span><br><span class="line">        for command in commands:</span><br><span class="line">            output = net_connect.send_command_timing(command)</span><br><span class="line">        print(output)</span><br><span class="line"></span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(f&quot;Error configuring SSL VPN Portal: &#123;e&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    finally:</span><br><span class="line">        if net_connect:</span><br><span class="line">            net_connect.disconnect()</span><br><span class="line">            print(&quot;Disconnected from FortiGate device&quot;)</span><br><span class="line"></span><br><span class="line"># FortiGate Device information</span><br><span class="line">fortigate_device = &#123;</span><br><span class="line">    &#x27;device_type&#x27;: &#x27;fortinet&#x27;,</span><br><span class="line">    &#x27;ip&#x27;: &#x27;xxx.xxx.xxx.xxx&#x27;, #防火牆IP</span><br><span class="line">    &#x27;username&#x27;: &#x27;username&#x27;,  #帳號</span><br><span class="line">    &#x27;password&#x27;: &#x27;password&#x27;,  #密碼</span><br><span class="line">    &#x27;port&#x27;: 22, </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file_name = input()</span><br><span class="line">file_path = os.path.join(&quot;List&quot;, file_name)</span><br><span class="line"></span><br><span class="line">net_connection = connect_to_fortigate(fortigate_device)</span><br><span class="line"></span><br><span class="line">if net_connection:</span><br><span class="line">    sslvpn_portal_name = f&#x27;SSLVPN_&#123;file_name&#125;_Portal&#x27;</span><br><span class="line">    mac_addr_list = main(file_path)</span><br><span class="line">    configure_sslvpn_portal(net_connection, sslvpn_portal_name, mac_addr_list)</span><br></pre></td></tr></table></figure>
+
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>再透過Jenkins上的自動化排程進行，可以達到每天幫我們做使用者開啟與關閉，配合mail_sender可以在關閉的當天寄送郵件給使用者，提醒他VPN已關閉。</p>
+<p>當然公司該走的流程還是得走，但我們就不用花時間來處理這些<del>砸碎</del>重要的事項，有更多時間去做更有意義或是產生自我價值的事情。</p>
+<p>有人說過要怎麼阻止一個人成長或者摧毀他人，就是讓他不停地重複的事情，或者忙到沒時間成長，沒動力自修</p>
+<p><strong>Github: <a target="_blank" rel="noopener" href="https://github.com/luca-yao/SSLVPN">https://github.com/luca-yao/SSLVPN</a></strong></p>
+<h3 id="公司可能不差，但主管爛是不可避免的，我們能做的就是保持更做熱誠、持續成長"><a href="#公司可能不差，但主管爛是不可避免的，我們能做的就是保持更做熱誠、持續成長" class="headerlink" title="公司可能不差，但主管爛是不可避免的，我們能做的就是保持更做熱誠、持續成長"></a>公司可能不差，但主管爛是不可避免的，我們能做的就是保持更做熱誠、持續成長</h3><h2 id="公司不養廢人，但有很多人會希望你是廢人"><a href="#公司不養廢人，但有很多人會希望你是廢人" class="headerlink" title="公司不養廢人，但有很多人會希望你是廢人"></a>公司不養廢人，但有很多人會希望你是廢人</h2><h1 id="共勉之-皿´"><a href="#共勉之-皿´" class="headerlink" title="共勉之 (#&#96;皿´)"></a>共勉之 (#&#96;皿´)</h1>
+                          
+              </div>
+
+              
+            </div>
+
+            
+          </div>
+          
+            
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/"
+      title="Ubuntu SteamCMD install for Palworld"
+     >
+
+    <p class="title-text">
+      
+        Ubuntu SteamCMD install for Palworld
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+              
+  </article>
+
+  
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
