@@ -227,14 +227,7 @@
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
-    <lastmod>2024-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -248,14 +241,7 @@
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Freeredis/</loc>
-    <lastmod>2024-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Nginx/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Fortigate/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -269,14 +255,14 @@
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Grafana/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Freeredis/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -284,6 +270,27 @@
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/tags/Ubuntu/</loc>
+    <lastmod>2024-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Grafana/</loc>
+    <lastmod>2024-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Loki/</loc>
+    <lastmod>2024-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://luca-yao-s-blog.web.app/tags/Markdown/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -303,14 +310,14 @@
     <priority>0.2</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Loki/</loc>
+    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
-  
-
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
@@ -327,7 +334,7 @@
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/System/</loc>
+    <loc>https://luca-yao-s-blog.web.app/categories/Services/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -335,13 +342,6 @@
   
   <url>
     <loc>https://luca-yao-s-blog.web.app/categories/Monitor/</loc>
-    <lastmod>2024-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/Services/</loc>
     <lastmod>2024-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
