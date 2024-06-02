@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="true" > 
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
 <link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="/fontawesome/css/brands.css" rel="stylesheet">
 <link href="/fontawesome/css/solid.css" rel="stylesheet">
@@ -21,18 +21,20 @@
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
 
-  <meta name="description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+  <meta name="description" content="前言很早就知道大家在使用，現在也是現在的主流技術，雖然很想接觸與使用，但因為公司規模沒有大到需要使用，甚至許多老公司也並未考慮使用該服務，所以身為一個技術宅，我能做的也只有自己建一套來玩玩了(´;ω;&#96;) 以上內容在原廠的文件中皆有提及，我僅將其把過程統整連結在此 本次安裝有許多怪怪的問題發生，所以就一起把它提出來啦~ 本次系統規格   Hostname System Memory Dis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes 安裝與 Cluster建立">
 <meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/index.html">
 <meta property="og:site_name" content="Luca Yao&#39;s blog">
-<meta property="og:description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+<meta property="og:description" content="前言很早就知道大家在使用，現在也是現在的主流技術，雖然很想接觸與使用，但因為公司規模沒有大到需要使用，甚至許多老公司也並未考慮使用該服務，所以身為一個技術宅，我能做的也只有自己建一套來玩玩了(´;ω;&#96;) 以上內容在原廠的文件中皆有提及，我僅將其把過程統整連結在此 本次安裝有許多怪怪的問題發生，所以就一起把它提出來啦~ 本次系統規格   Hostname System Memory Dis">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/covers/IMG_2408.png">
 <meta property="article:published_time" content="2024-06-02T07:48:51.000Z">
-<meta property="article:modified_time" content="2024-06-02T07:48:51.393Z">
+<meta property="article:modified_time" content="2024-06-02T12:23:49.756Z">
 <meta property="article:author" content="Luca Yao">
-<meta property="article:tag" content="luca, 盧卡, 莫卡, Cisco, 網路, 網頁, 雜事, blog, 系統">
+<meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/covers/IMG_2408.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -147,14 +149,14 @@
     <div class="widget">
       <h3 class="widget-title">分類</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/Coding/">
-                Coding
-                <div class="category-count">10</div>
-            </a>
-        
             <a class="category-link" href="/categories/Device/">
                 Device
                 <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">10</div>
             </a>
         
             <a class="category-link" href="/categories/System/">
@@ -171,6 +173,11 @@
                 Monitor
                 <div class="category-count">6</div>
             </a>
+        
+            <a class="category-link" href="/categories/Service/">
+                Service
+                <div class="category-count">2</div>
+            </a>
         </div>
     </div>
   </div>
@@ -181,7 +188,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">標籤</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Powershell/" rel="tag">Powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Powershell/" rel="tag">Powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
     </div>
   </div>
 
@@ -195,7 +202,7 @@
       
         <a class="archive-link" href="/archives/2024/06 ">
           六月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
         <a class="archive-link" href="/archives/2024/05 ">
@@ -234,6 +241,12 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
+          <a class="recent-link" href="/2024/06/02/Kubernetes-kubectl-create-%E8%88%87-kubectl-apply-%E7%9A%84%E5%B7%AE%E7%95%B0/" title="Kubernetes kubectl create 與 kubectl apply 的差異" >
+            <div class="recent-link-text">
+              Kubernetes kubectl create 與 kubectl apply 的差異
+            </div>
+          </a>
+        
           <a class="recent-link" href="/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/" title="Kubernetes 安裝與 Cluster建立" >
             <div class="recent-link-text">
               Kubernetes 安裝與 Cluster建立
@@ -258,12 +271,6 @@
             </div>
           </a>
         
-          <a class="recent-link" href="/2024/03/28/Powershell-%E8%87%AA%E5%8B%95%E5%8C%96%E5%AE%89%E8%A3%9D%E8%BB%9F%E9%AB%94/" title="Powershell 自動化安裝軟體" >
-            <div class="recent-link-text">
-              Powershell 自動化安裝軟體
-            </div>
-          </a>
-        
       </ul>
     </div>
   </div>
@@ -279,6 +286,16 @@
     itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
     
       
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_clwxl5g9k0013skv449um8gy2">
+        <img src="/covers/IMG_2408.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
         
           <div class="article-inner">
             <div class="article-main">
@@ -302,20 +319,112 @@
                       <div class="need-seperator meta-info">
                         <div class="meta-cate-flex">
   
-    未分類 
+  <a class="meta-cate-link" href="/categories/Service/">Service</a>
    
 </div>
 
                       </div>
                       <div class="wordcount need-seperator meta-info">
-                        0 詞
+                        1.1k 詞
                       </div>
                   </div>
                   
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li></ul>
+
               </header>
               <div class="e-content article-entry" itemprop="articleBody">
                 
-                        
+                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很早就知道大家在使用，現在也是現在的主流技術，雖然很想接觸與使用，但因為公司規模沒有大到需要使用，甚至許多老公司也並未考慮使用該服務，所以身為一個技術宅，我能做的也只有自己建一套來玩玩了(´;ω;&#96;)</p>
+<h4 id="以上內容在原廠的文件中皆有提及，我僅將其把過程統整"><a href="#以上內容在原廠的文件中皆有提及，我僅將其把過程統整" class="headerlink" title="以上內容在原廠的文件中皆有提及，我僅將其把過程統整"></a>以上內容在原廠的文件中皆有提及，我僅將其把過程統整</h4><p><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/home/">連結在此</a></p>
+<p>本次安裝有許多怪怪的問題發生，所以就一起把它提出來啦~</p>
+<h2 id="本次系統規格"><a href="#本次系統規格" class="headerlink" title="本次系統規格"></a>本次系統規格</h2><table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>System</th>
+<th>Memory</th>
+<th>Disk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>k8s-master</td>
+<td>Ubuntu 20.04 LTS</td>
+<td>8GB</td>
+<td>50GB</td>
+</tr>
+<tr>
+<td>k8s-worker1</td>
+<td>Ubuntu 20.04 LTS</td>
+<td>8GB</td>
+<td>50GB</td>
+</tr>
+<tr>
+<td>k8s-worker2</td>
+<td>Ubuntu 20.04 LTS</td>
+<td>8GB</td>
+<td>50GB</td>
+</tr>
+</tbody></table>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><ul>
+<li>關閉SWAP<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;/swap/d&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><ul>
+<li>關閉防火牆<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> --now ufw &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><ul>
+<li>啟動與載入Kernel modules<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將要使用的模組寫到config中</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt;/etc/modules-load.d/containerd.conf&lt;&lt;<span class="string">EOF  </span></span><br><span class="line"><span class="string">overlay</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 載入模組</span></span><br><span class="line">modprobe overlay</span><br><span class="line">modprobe br_netfilter</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h2><ul>
+<li>設定sysctl<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 啟動連線轉址功能</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt;/etc/sysctl.d/kubernetes.conf&lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables  = 1</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward                 = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 因為設定完後需要重啟才會載入，所以可以透過以下指令立刻重新載入</span></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h2><ul>
+<li>安裝 containerd runtime<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立資料夾</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /etc/apt/keyrings</span><br><span class="line"><span class="comment"># 下載Public Key 並改名為 docker.gpg</span></span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="comment"># 匯入key</span></span><br><span class="line"><span class="built_in">echo</span>   <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">  <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line"><span class="comment"># 更新系統</span></span><br><span class="line">apt -qq update &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="comment"># 安裝container</span></span><br><span class="line">apt install -qq -y containerd.io &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"><span class="comment"># 匯入預設container 設定檔</span></span><br><span class="line">containerd config default &gt;/etc/containerd/config.toml</span><br><span class="line"><span class="comment"># 調整設定檔 程式啟動時的群組</span></span><br><span class="line">vim /etc/containerd/config.toml</span><br><span class="line"><span class="string">&#x27;&#x27;</span></span><br><span class="line">SystemdCgroup = True</span><br><span class="line"><span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># 重新啟動並解設置為開機啟動</span></span><br><span class="line">systemctl restart containerd</span><br><span class="line">systemctl <span class="built_in">enable</span> containerd &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第六步"><a href="#第六步" class="headerlink" title="第六步"></a>第六步</h2><ul>
+<li>新增給Kubernetes使用的來源庫Repo<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -</span><br><span class="line">apt-add-repository <span class="string">&quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot;</span> </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第七步"><a href="#第七步" class="headerlink" title="第七步"></a>第七步</h2><ul>
+<li>安裝所需必要套件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># xx 就看你需要或者你要安裝的版本進行修正</span></span><br><span class="line">apt install -qq -y kubeadm=1.xx.0-00 kubelet=1.xx.0-00 kubectl=1.xx.0-00 </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第八步"><a href="#第八步" class="headerlink" title="第八步"></a>第八步</h2><ul>
+<li>檢查安裝成果<br>檢查kubeadm, kubelet, kubectl 的安裝結果，如果正確安裝可以看到版本號碼<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm version</span><br><span class="line">kubelet --version</span><br><span class="line">kubectl version</span><br></pre></td></tr></table></figure>
+<img src="https://catcat.blog/wp-content/uploads/2023/12/image.png" alt="img"></li>
+</ul>
+<h2 id="第九步"><a href="#第九步" class="headerlink" title="第九步"></a>第九步</h2><ul>
+<li>初始化 Master<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images pull</span><br></pre></td></tr></table></figure>
+如果拉取成功，会看到类似下面的输出：<br><img src="https://imgur.com/Qzx69Rt.png" alt="Imgur"></li>
+</ul>
+<h2 id="第十步"><a href="#第十步" class="headerlink" title="第十步"></a>第十步</h2><p>初始化 Kubeadm</p>
+<ul>
+<li><font color=#008000>–apiserver-advertise-address</font> 这个地址是本地用于和其他节点通信的 IP 地址，即 Master 节点 IP</li>
+<li><font color=#008000>–pod-network-cidr pod network</font> 地址空间<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket=/run/containerd/containerd.sock  --apiserver-advertise-address=192.168.50.10</span><br></pre></td></tr></table></figure>
+※注意，初始化完成後會產生 Token 和 Token-ca-cert-hash 這個要記得，稍後會用上 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.... </span><br><span class="line">kubeadm <span class="built_in">join</span> ip:6443 --token p6vecd.hlipzx6b2vhep7st \</span><br><span class="line">                     --discovery-token-ca-cert-hash sha256:d4463dc6b42d5a2sabda199cce041d18d39a70acc1b479ebv728b0076768</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="第十步-1"><a href="#第十步-1" class="headerlink" title="第十步"></a>第十步</h2><p>配置.kube</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line"><span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"><span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+
+<h2 id="檢查狀態"><a href="#檢查狀態" class="headerlink" title="檢查狀態"></a>檢查狀態</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line">kubectl get pods -A</span><br></pre></td></tr></table></figure>
+
+<h2 id="Shell-自動補齊"><a href="#Shell-自動補齊" class="headerlink" title="Shell 自動補齊"></a>Shell 自動補齊</h2><p>透過以下指另，可以將kubectl命令自動補齊</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &lt;(kubectl completion bash)&gt;</span><br><span class="line">echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="部屬Pod-Network-網路"><a href="#部屬Pod-Network-網路" class="headerlink" title="部屬Pod Network 網路"></a>部屬Pod Network 網路</h2><p>依照 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/cluster-administration/addons/">https://kubernetes.io/docs/concepts/cluster-administration/addons/</a> 有很多種部屬方式，本次選擇 overlay 的方式。</p>
+<h4 id="flannel-overlay-方法如下："><a href="#flannel-overlay-方法如下：" class="headerlink" title="flannel (overlay) 方法如下："></a>flannel (overlay) 方法如下：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下載</span></span><br><span class="line">wget https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>確認yml檔中的網路設置，確保與 –pod-network-cidr 依樣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net-conf.json: |</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;Network&quot;: &quot;10.244.0.0/16&quot;,</span><br><span class="line">    &quot;Backend&quot;: &#123;</span><br><span class="line">      &quot;Type&quot;: &quot;vxlan&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>註： apply雖然可以建立 pod，和Create又不太一樣，這點有空後面在來說</p>
+<p>網路配置完成之後，我們可以來檢查一下pod狀態是否正常，以確認設定和配置都沒問題(尤其是Coredns和flannel)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod -A</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/PPkX0q6.png" alt="Imgur"></p>
+<h2 id="做到這一步基本上我們Cluster已經完成了接下來可以把Worker加進來了"><a href="#做到這一步基本上我們Cluster已經完成了接下來可以把Worker加進來了" class="headerlink" title="做到這一步基本上我們Cluster已經完成了接下來可以把Worker加進來了"></a>做到這一步基本上我們Cluster已經完成了接下來可以把Worker加進來了</h2><p>添加 Worker很快很簡單，確定worker環境也準備好之後，使用join加入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm <span class="built_in">join</span> 192.168.50.10:6443 --token p6vecd.hlipzx6b2vhep7st \</span><br><span class="line">                     --discovery-token-ca-cert-hash sha256:d4463dc6b42d5a2sabda199cce041d18d39a70acc1b479ebv728b0076768</span><br></pre></td></tr></table></figure>
+
+<h2 id="都設置好之後可以在-MASTER-上查看-cluster狀態"><a href="#都設置好之後可以在-MASTER-上查看-cluster狀態" class="headerlink" title="都設置好之後可以在 MASTER 上查看 cluster狀態"></a>都設置好之後可以在 MASTER 上查看 cluster狀態</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/D65xWFz.png" alt="Imgur"></p>
+<h3 id="也可以透過以下指令查看cluster狀態"><a href="#也可以透過以下指令查看cluster狀態" class="headerlink" title="也可以透過以下指令查看cluster狀態"></a>也可以透過以下指令查看cluster狀態</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl cluster-info</span><br></pre></td></tr></table></figure>
+<p><img src="https://imgur.com/vfJXmZ8.png" alt="Imgur"></p>
+
                           
               </div>
 
@@ -327,10 +436,15 @@
           
             
 <nav id="article-nav">
-  <a class="article-nav-btn left  disabled "
+  <a class="article-nav-btn left "
+    
+      href="/2024/06/02/Kubernetes-kubectl-create-%E8%88%87-kubectl-apply-%E7%9A%84%E5%B7%AE%E7%95%B0/"
+      title="Kubernetes kubectl create 與 kubectl apply 的差異"
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
+      
+        Kubernetes kubectl create 與 kubectl apply 的差異
         
     </p>
   </a>

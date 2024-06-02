@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="true" > 
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
 <link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="/fontawesome/css/brands.css" rel="stylesheet">
 <link href="/fontawesome/css/solid.css" rel="stylesheet">
@@ -14,23 +14,27 @@
   
 
   
-  <title>Category: Services | Luca Yao&#39;s blog</title>
+  <title>Kubernetes kubectl create 與 kubectl apply 的差異 | Luca Yao&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
 
-  <meta name="description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Luca Yao&#39;s blog">
-<meta property="og:url" content="https://luca-yao-s-blog.web.app/categories/Services/index.html">
+  <meta name="description" content="前言上篇我們講到怎麼建置kubernetes的cluster，其中有提到 1kubectl apply -f kube-flannel.yml 的時候有提到 Create和Apply的差異，因此今天我們來好好講講兩者的差異吧 さあ　はじましょう　ヽ(・×・´)ゞ命令式(Imperative) 與 宣告式(Declarative)命令式(Imperative) 為了一套系統建立多項不同的資源時，你可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes kubectl create 與 kubectl apply 的差異">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-kubectl-create-%E8%88%87-kubectl-apply-%E7%9A%84%E5%B7%AE%E7%95%B0/index.html">
 <meta property="og:site_name" content="Luca Yao&#39;s blog">
-<meta property="og:description" content="是Luca 不是 Luka一個一心只想玩技術的工程師，到現在還不知道自己是系統還是網路">
+<meta property="og:description" content="前言上篇我們講到怎麼建置kubernetes的cluster，其中有提到 1kubectl apply -f kube-flannel.yml 的時候有提到 Create和Apply的差異，因此今天我們來好好講講兩者的差異吧 さあ　はじましょう　ヽ(・×・´)ゞ命令式(Imperative) 與 宣告式(Declarative)命令式(Imperative) 為了一套系統建立多項不同的資源時，你可">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-kubectl-create-%E8%88%87-kubectl-apply-%E7%9A%84%E5%B7%AE%E7%95%B0/covers/">
+<meta property="article:published_time" content="2024-06-02T12:30:07.000Z">
+<meta property="article:modified_time" content="2024-06-02T13:36:21.144Z">
 <meta property="article:author" content="Luca Yao">
-<meta property="article:tag" content="luca, 盧卡, 莫卡, Cisco, 網路, 網頁, 雜事, blog, 系統">
+<meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-kubectl-create-%E8%88%87-kubectl-apply-%E7%9A%84%E5%B7%AE%E7%95%B0/covers/">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -276,65 +280,122 @@
 </sidebar>
     </div>
     <div id="content-body">
-       
+      
 
-<div class="archive-main-card">
-    <div class="archive-top">
-      <div class="main-title-bar">
-        <div class="main-title-dot"></div>
-        <h1 class="article-title">Archive</h1>
-      </div>    
-    </div>
-    
+  <article id="post-Kubernetes-kubectl-create-與-kubectl-apply-的差異" class="h-entry article article-type-post"
+    itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
     
       
-      
-        
-        <div class="year-line">
-            <div class="year-num">2024</div>
-            <div class="dot-wrapper">
-                <div class="dot"></div>
-            </div>
-            <div class="article-count">2 article_count_plural</div>
-        </div>
-      
-      <a class="archive-article-link" href="/2024/02/10/Ubuntu-SteamCMD-install-for-Palworld/" title="Ubuntu SteamCMD install for Palworld">
-        <div class="date">02-10</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    Ubuntu SteamCMD install for Palworld
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Linux
-        </div>
-      </a>
+<div class="article-gallery">
+  <div class="article-gallery-photos">
     
-      
-      
-      <a class="archive-article-link" href="/2024/02/09/Gogs-Jenkins-%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8B%95%E5%8C%96%E9%83%A8%E5%B1%AC%E5%B9%B3%E5%8F%B0/" title="Gogs + Jenkins 搭建自動化部屬平台">
-        <div class="date">02-09</div>
-        <div class="line">
-            <div class="dot"></div>
-        </div>
-        <div class="title">
-            <div class="title-inner">
-                
-                    Gogs + Jenkins 搭建自動化部屬平台
-                
-            </div>
-        </div>
-        <div class="tags">
-            #Ubuntu
-        </div>
+      <a class="article-gallery-img" rel="gallery_clwxl5g9j0012skv4444fdyiy">
+        <img src="/covers/" itemprop="image">
       </a>
     
   </div>
+</div>
+
+        
+          <div class="article-inner">
+            <div class="article-main">
+              <header class="article-header">
+                
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Kubernetes kubectl create 與 kubectl apply 的差異
+      </h1>
+    
+  
+</div>
+
+                  <div class='meta-info-bar'>
+                    <div class="meta-info">
+  <time class="dt-published" datetime="2024-06-02T12:30:07.000Z" itemprop="datePublished">2024-06-02</time>
+</div>
+                      <div class="need-seperator meta-info">
+                        <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Service/">Service</a>
+   
+</div>
+
+                      </div>
+                      <div class="wordcount need-seperator meta-info">
+                        628 詞
+                      </div>
+                  </div>
+                  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li></ul>
+
+              </header>
+              <div class="e-content article-entry" itemprop="articleBody">
+                
+                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上篇我們講到怎麼建置kubernetes的cluster，其中有提到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>的時候有提到 Create和Apply的差異，因此今天我們來好好講講兩者的差異吧</p>
+<h2 id="さあ-はじましょう-ヽ-・×・´-ゞ"><a href="#さあ-はじましょう-ヽ-・×・´-ゞ" class="headerlink" title="さあ　はじましょう　ヽ(・×・´)ゞ"></a>さあ　はじましょう　ヽ(・×・´)ゞ</h2><h3 id="命令式-Imperative-與-宣告式-Declarative"><a href="#命令式-Imperative-與-宣告式-Declarative" class="headerlink" title="命令式(Imperative) 與 宣告式(Declarative)"></a>命令式(Imperative) 與 宣告式(Declarative)</h3><h4 id="命令式-Imperative"><a href="#命令式-Imperative" class="headerlink" title="命令式(Imperative)"></a>命令式(Imperative)</h4><blockquote>
+<p>為了一套系統建立多項不同的資源時，你可以透過一行一行的命令來建立資源，因為資源建立與啟動可能有其順序性，所以透過這種方式建立，你必須精準的理解資源建立的過程有什麼相依性。</p>
+</blockquote>
+<ul>
+<li>你必須知道要「做什麼」與「怎麼做」才能將系統完整建立起來，就如同我們「手動」建立資源一樣，所以你必須要將所有需要的設定與指令都設定上去，才能如期運行。</li>
+</ul>
+<h4 id="宣告式-Declarative"><a href="#宣告式-Declarative" class="headerlink" title="宣告式(Declarative)"></a>宣告式(Declarative)</h4><blockquote>
+<p>為了一套系統建立多項不同的資源時，你可以透過宣告一份資源的定義檔(YAML&#x2F;JSON)，直接將定義檔提供給平台或叢集，由叢集或平台自行決定該如何部署資源，而部署的順序也可以由系統自行分析與判斷。</p>
+</blockquote>
+<ul>
+<li>所以你只需要知道「要什麼」就好，剩下的由系統幫你完成。</li>
+</ul>
+<p>兩者當然有好有壞，如果用宣告式，可以幫你把預設的設定套上去使用，但如果你有客製化或者特別需求，就不是那麼方便，因此在不同情況下要要有不同的選擇，各有優缺點。( • ̀ω•́ )</p>
+<h3 id="Kubectl-Create-與-Kubectl-apply"><a href="#Kubectl-Create-與-Kubectl-apply" class="headerlink" title="Kubectl Create 與 Kubectl apply"></a>Kubectl Create 與 Kubectl apply</h3><ul>
+<li><p><code>kubectl create</code>  屬於 <code>Imperative</code> ，因為你明確的告知 Kubernetes 要「建立」一個資源，他不會紀錄建立資源的最後狀態，真的就是幫你建立資源而已。</p>
+</li>
+<li><p><code>kubectl apply</code> 屬於 <code>Declarative</code>，因為你不用明確的告訴 Kubernetes 要如何建立一個資源，也不用管現在叢集中有沒有這個資源，他就是很單純的幫你建立起你想要的資源而已。如果目前沒有資源，Kubernetes 還會在你建立資源時，同時幫你建立一份快照(Snapshot)，紀錄在資源的 <code>.metadata.annotations.kubectl.kubernetes.io/last-applied-configuration</code> 底下，你日後如果對 YAML 檔案進行更新，他就會去比對先前的版本與最近一次的套用版本，藉此計算出差異之處，並套用差異更新。</p>
+</li>
+</ul>
+<p>透過以下例子我相信你會更加清楚兩個的差異：</p>
+
+                          
+              </div>
+
+              
+            </div>
+
+            
+          </div>
+          
+            
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/"
+      title="Kubernetes 安裝與 Cluster建立"
+     >
+
+    <p class="title-text">
+      
+        Kubernetes 安裝與 Cluster建立
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+              
+  </article>
+
+  
     </div>
     <div id="footer-wrapper">
       <footer id="footer">
