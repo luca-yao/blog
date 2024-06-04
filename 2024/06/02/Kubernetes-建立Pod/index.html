@@ -14,27 +14,27 @@
   
 
   
-  <title>Grafana-Transform-參數介紹 | Luca Yao&#39;s blog</title>
+  <title>Kubernetes 建立Pod | Luca Yao&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
   <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
 
-  <meta name="description" content="1234567Grafana 可以再接收到資料後，再針對資料做整理(即時性)，再加上有Table功能可以搭配檢視不得不說，這真的是好用到不行，基本上你想要的資料都可以透過下面的類型去處理不用再去找模板或者自己建一套模板，並且花時間測試後才知道能不能使用不過你還是得先了解一下該怎麼組合就是了 σ&#96;∀´)σ 進入正題建好圖表後，可以在編輯edit中的，Transform中使用    用途 說明">
+  <meta name="description" content="前言先前把Kubenetes的cluster與環境準備好了，今天我們來看一下該怎麼建立Pod吧!( • ̀ω•́ ) 建立Pod Pod 是 Kubernetes 運作的最小單位，所以我們要先從建立 Pod 開始。  而要在 Pod 中運行的程式本篇使用 potainer 作為範例，portainer 是一種 Docker UI 的管理工具。 每個 Pod 都有屬於自己的 yaml 檔，yaml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Grafana-Transform-參數介紹">
-<meta property="og:url" content="https://luca-yao-s-blog.web.app/2023/08/08/Grafana-Transform-%E5%8F%83%E6%95%B8%E4%BB%8B%E7%B4%B9/index.html">
+<meta property="og:title" content="Kubernetes 建立Pod">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%BB%BA%E7%AB%8BPod/index.html">
 <meta property="og:site_name" content="Luca Yao&#39;s blog">
-<meta property="og:description" content="1234567Grafana 可以再接收到資料後，再針對資料做整理(即時性)，再加上有Table功能可以搭配檢視不得不說，這真的是好用到不行，基本上你想要的資料都可以透過下面的類型去處理不用再去找模板或者自己建一套模板，並且花時間測試後才知道能不能使用不過你還是得先了解一下該怎麼組合就是了 σ&#96;∀´)σ 進入正題建好圖表後，可以在編輯edit中的，Transform中使用    用途 說明">
+<meta property="og:description" content="前言先前把Kubenetes的cluster與環境準備好了，今天我們來看一下該怎麼建立Pod吧!( • ̀ω•́ ) 建立Pod Pod 是 Kubernetes 運作的最小單位，所以我們要先從建立 Pod 開始。  而要在 Pod 中運行的程式本篇使用 potainer 作為範例，portainer 是一種 Docker UI 的管理工具。 每個 Pod 都有屬於自己的 yaml 檔，yaml">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://luca-yao-s-blog.web.app/2023/08/08/Grafana-Transform-%E5%8F%83%E6%95%B8%E4%BB%8B%E7%B4%B9/covers/%E9%9D%9223.jpg">
-<meta property="article:published_time" content="2023-08-08T13:36:20.000Z">
-<meta property="article:modified_time" content="2023-08-10T15:35:32.105Z">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%BB%BA%E7%AB%8BPod/covers/Kuro_Hayakawa_oil_painting_rough_drawing_Cordon_Bleu_soft_light_8b60df89-e03b-4020-b1b0-cd1b0d7f5c4e.png">
+<meta property="article:published_time" content="2024-06-02T14:33:53.000Z">
+<meta property="article:modified_time" content="2024-06-04T09:49:34.734Z">
 <meta property="article:author" content="Luca Yao">
-<meta property="article:tag" content="Grafana">
+<meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2023/08/08/Grafana-Transform-%E5%8F%83%E6%95%B8%E4%BB%8B%E7%B4%B9/covers/%E9%9D%9223.jpg">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%BB%BA%E7%AB%8BPod/covers/Kuro_Hayakawa_oil_painting_rough_drawing_Cordon_Bleu_soft_light_8b60df89-e03b-4020-b1b0-cd1b0d7f5c4e.png">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -277,15 +277,15 @@
     <div id="content-body">
       
 
-  <article id="post-Grafana-Transform-參數介紹" class="h-entry article article-type-post"
+  <article id="post-Kubernetes-建立Pod" class="h-entry article article-type-post"
     itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
     
       
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img" rel="gallery_clx0h13ea0010sov49d69fsj9">
-        <img src="/covers/%E9%9D%9223.jpg" itemprop="image">
+      <a class="article-gallery-img" rel="gallery_clx0h13ed001dsov46xi14bh2">
+        <img src="/covers/Kuro_Hayakawa_oil_painting_rough_drawing_Cordon_Bleu_soft_light_8b60df89-e03b-4020-b1b0-cd1b0d7f5c4e.png" itemprop="image">
       </a>
     
   </div>
@@ -301,7 +301,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        Grafana-Transform-參數介紹
+        Kubernetes 建立Pod
       </h1>
     
   
@@ -309,147 +309,48 @@
 
                   <div class='meta-info-bar'>
                     <div class="meta-info">
-  <time class="dt-published" datetime="2023-08-08T13:36:20.000Z" itemprop="datePublished">2023-08-08</time>
+  <time class="dt-published" datetime="2024-06-02T14:33:53.000Z" itemprop="datePublished">2024-06-02</time>
 </div>
                       <div class="need-seperator meta-info">
                         <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/Monitor/">Monitor</a>
+  <a class="meta-cate-link" href="/categories/Services/">Services</a>
    
 </div>
 
                       </div>
                       <div class="wordcount need-seperator meta-info">
-                        681 詞
+                        282 詞
                       </div>
                   </div>
                   
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li></ul>
 
               </header>
               <div class="e-content article-entry" itemprop="articleBody">
                 
-                        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Grafana 可以再接收到資料後，再針對資料做整理(即時性)，再加上有Table功能可以搭配檢視</span><br><span class="line"></span><br><span class="line">不得不說，這真的是好用到不行，基本上你想要的資料都可以透過下面的類型去處理</span><br><span class="line"></span><br><span class="line">不用再去找模板或者自己建一套模板，並且花時間測試後才知道能不能使用</span><br><span class="line"></span><br><span class="line">不過你還是得先了解一下該怎麼組合就是了 σ`∀´)σ</span><br></pre></td></tr></table></figure>
-<h2 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h2><p>建好圖表後，可以在編輯<code>edit</code>中的，Transform中使用</p>
-<table>
-<thead>
-<tr>
-<th>用途</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Add field from calculation</td>
-<td>使用現有字段計算成新的類別</td>
-</tr>
-<tr>
-<td>Concatenate fields</td>
-<td>將所有字段串聯起來組成新字段 ( 在<code>Table View</code> 下才看的出來)</td>
-</tr>
-<tr>
-<td>Config from query results</td>
-<td>將查詢結果中提許字段，合併到另外一個查詢中</td>
-</tr>
-<tr>
-<td>Convert field type</td>
-<td>將字段轉換成其他類別</td>
-</tr>
-<tr>
-<td>Create heatmap</td>
-<td>根據資料計算熱圖</td>
-</tr>
-<tr>
-<td>Extract fields</td>
-<td>針對資料再分析(JSON，Labels)</td>
-</tr>
-<tr>
-<td>Field lookup</td>
-<td>透過外部DNS查詢數據來源</td>
-</tr>
-<tr>
-<td>Filter by name</td>
-<td>透過正規表示式或標籤來篩選數據</td>
-</tr>
-<tr>
-<td>Filter data by query</td>
-<td>透過群組來過濾數據</td>
-</tr>
-<tr>
-<td>Filter data by values</td>
-<td>透過數值來判斷篩選方式</td>
-</tr>
-<tr>
-<td>Group by</td>
-<td>按照指定的標籤做分組，並且對每個組別數據做處理</td>
-</tr>
-<tr>
-<td>Grouping to matrix</td>
-<td>將三個字段組成一個<code>matrix</code></td>
-</tr>
-<tr>
-<td>Histogram</td>
-<td>畫長條圖</td>
-</tr>
-<tr>
-<td>Join by field</td>
-<td>將多個表之間相同的字串，合併到一個表中</td>
-</tr>
-<tr>
-<td>Join by labels</td>
-<td>將Labels的結果展示到<code>Table</code>中</td>
-</tr>
-<tr>
-<td>Labels to fields</td>
-<td>按照時間分組排列，並返回標籤或標記於table中</td>
-</tr>
-<tr>
-<td>Limit</td>
-<td>限制顯示的資料量</td>
-</tr>
-<tr>
-<td>Merge</td>
-<td>將多個查詢合併成一個table</td>
-</tr>
-<tr>
-<td>Organize fields</td>
-<td>重新排序、隱藏、重新命名字串&#x2F;列，只能用於當前的圖表</td>
-</tr>
-<tr>
-<td>Partition by values</td>
-<td>透過一個或多個字段中的唯一值進行區分</td>
-</tr>
-<tr>
-<td>Prepare time series</td>
-<td>將時間序列數據從寬格式轉換為長格式或反之亦然</td>
-</tr>
-<tr>
-<td>Reduce</td>
-<td>壓縮整合字段</td>
-</tr>
-<tr>
-<td>Rename by regex</td>
-<td>使用正則表達式和替換模式重命名部分查詢結果</td>
-</tr>
-<tr>
-<td>Rows to fields</td>
-<td>行到字段轉換將行轉換為單獨的字段</td>
-</tr>
-<tr>
-<td>Series to rows</td>
-<td>將多個時間序列數據查詢的結果合併為一個結果</td>
-</tr>
-<tr>
-<td>Sort by</td>
-<td>排序</td>
-</tr>
-<tr>
-<td>Spatial operations</td>
-<td>將空間操作應用於查詢結果中</td>
-</tr>
-</tbody></table>
-<p>以上只是簡單的說明一下個功能的用途，實際在操作的時候會有多是需要互相搭配使用的</p>
-<p>如果想要更清晰簡單的理解，可以去看看 <strong>Grafana Labs</strong> 的 文件說明，裡面也有舉些簡單的案例。</p>
-<p>網址在這邊：<a target="_blank" rel="noopener" href="https://grafana.com/docs/grafana/latest/panels-visualizations/query-transform-data/transform-data/#series-to-rows">https://grafana.com/docs/grafana/latest/panels-visualizations/query-transform-data/transform-data/#series-to-rows</a></p>
+                        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>先前把Kubenetes的cluster與環境準備好了，今天我們來看一下該怎麼建立Pod吧!( • ̀ω•́ )</p>
+<h3 id="建立Pod"><a href="#建立Pod" class="headerlink" title="建立Pod"></a>建立Pod</h3><blockquote>
+<p>Pod 是 Kubernetes 運作的最小單位，所以我們要先從建立 Pod 開始。</p>
+</blockquote>
+<p>而要在 Pod 中運行的程式本篇使用 potainer 作為範例，portainer 是一種 Docker UI 的管理工具。</p>
+<p>每個 Pod 都有屬於自己的 yaml 檔，yaml 檔是用來描述這個 Pod，包含 Pod 的名稱、有哪些 Container 等等。</p>
+<h3 id="建立-Pod-的-yaml-檔"><a href="#建立-Pod-的-yaml-檔" class="headerlink" title="建立 Pod 的 yaml 檔"></a>建立 Pod 的 yaml 檔</h3><p>基本的 Pod yaml 檔格式和內容如下 :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: &lt;myapp&gt;</span><br><span class="line">  labels:</span><br><span class="line">    name: &lt;myapp&gt;</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: &lt;myapp&gt;</span><br><span class="line">    image: &lt;Image&gt;</span><br><span class="line">    resources:</span><br><span class="line">      limits:</span><br><span class="line">        memory: &quot;128Mi&quot;</span><br><span class="line">        cpu: &quot;500m&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: &lt;Port&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>kind : 定義這個元件的類別，例如 : Pod、Node、Service、Namespace 或是 ReplicationController。</p>
+</li>
+<li><p>metadata : 定義這個元件的名稱和他的標籤名稱，標籤可以自訂給多組，例如 : name, app, env 等等。給標籤的用處是可以用來篩選出 Pod，這會在後面介紹的 Service 中再細說。<br> 留言</p>
+</li>
+<li><p>spec : 定義 Container</p>
+<ul>
+<li>containers.name : Container 名稱</li>
+<li>containers.image : 使用的 Image</li>
+<li>containers.resources : 硬體資源限制，可以不設定</li>
+<li>containers.ports : 開放給外部存取的 Port 號</li>
+</ul>
+</li>
+</ul>
 
                           
               </div>
@@ -462,27 +363,22 @@
           
             
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2023/08/10/Grafana-Blackbox-%E7%9B%A3%E6%8E%A7Website%E6%95%88%E8%83%BD%E8%88%87%E7%8B%80%E6%85%8B/"
-      title="Grafana-Blackbox-監控Website效能與狀態"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        Grafana-Blackbox-監控Website效能與狀態
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2023/08/07/%E9%80%8F%E9%81%8ELinux-Bash-%E6%AF%8F%E6%97%A5%E8%87%AA%E5%8B%95%E5%82%99%E4%BB%BD-Fortigate-Config/"
-      title="透過Linux Bash 每日自動備份 Fortigate Config"
+      href="/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/"
+      title="Kubernetes 安裝與 Cluster建立"
      >
 
     <p class="title-text">
       
-        透過Linux Bash 每日自動備份 Fortigate Config
+        Kubernetes 安裝與 Cluster建立
         
     </p>
     <i class="fa-solid fa-angle-right"></i>
