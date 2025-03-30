@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="desktop" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>資訊安全觀念分享 | Luca Yao&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2">
+
+  <meta name="description" content="前言隨著物聯網與穿戴裝置聯網的需求與普及，雖然帶來了許多便利性，卻也間接的讓資訊安全 (Cyber Security) 被逐漸放大重視。以往可以看到長輩在 街道、公園等地、泡茶閒聊、下棋，逐漸變成看手機，分享短影音，拍攝短影音。 我們似乎不得不開始讓大家除了實體安全的詐騙、勒索改變成資訊安全，網路安全的注意。 因此有感而發的覺得似乎要跟大家聊聊這件事情(´･_･&#96;) 資訊安全：網路世代所有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資訊安全觀念分享">
+<meta property="og:url" content="https://luca-yao-s-blog.web.app/2025/03/30/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8%E8%A7%80%E5%BF%B5%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:site_name" content="Luca Yao&#39;s blog">
+<meta property="og:description" content="前言隨著物聯網與穿戴裝置聯網的需求與普及，雖然帶來了許多便利性，卻也間接的讓資訊安全 (Cyber Security) 被逐漸放大重視。以往可以看到長輩在 街道、公園等地、泡茶閒聊、下棋，逐漸變成看手機，分享短影音，拍攝短影音。 我們似乎不得不開始讓大家除了實體安全的詐騙、勒索改變成資訊安全，網路安全的注意。 因此有感而發的覺得似乎要跟大家聊聊這件事情(´･_･&#96;) 資訊安全：網路世代所有">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://luca-yao-s-blog.web.app/2025/03/30/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8%E8%A7%80%E5%BF%B5%E5%88%86%E4%BA%AB/covers/stelliva42_Cyber_security_Hacker_mutiple_screen_AR_95b7c789-5a7b-4bcf-b77b-f5a4e4cbfe04.png">
+<meta property="article:published_time" content="2025-03-30T06:26:42.000Z">
+<meta property="article:modified_time" content="2025-03-30T08:47:15.300Z">
+<meta property="article:author" content="Luca Yao">
+<meta property="article:tag" content="Cyber Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luca-yao-s-blog.web.app/2025/03/30/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8%E8%A7%80%E5%BF%B5%E5%88%86%E4%BA%AB/covers/stelliva42_Cyber_security_Hacker_mutiple_screen_AR_95b7c789-5a7b-4bcf-b77b-f5a4e4cbfe04.png">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/img/1.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Luca Yao's blog </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="搜尋" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/about/stelliva4.png></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Luca Yao </div>
+      <div class="dot"></div>
+      <div class="subtitle">是Luca 不是 Luka </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com/mokayao0414" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561197961197094/" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/luca-yao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分類</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Device/">
+                Device
+                <div class="category-count">2</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Coding/">
+                Coding
+                <div class="category-count">10</div>
+            </a>
+        
+            <a class="category-link" href="/categories/System/">
+                System
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Services/">
+                Services
+                <div class="category-count">4</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Monitor/">
+                Monitor
+                <div class="category-count">6</div>
+            </a>
+        
+            <a class="category-link" href="/categories/Information/">
+                Information
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">標籤</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Fortigate/" rel="tag">Fortigate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Freeredis/" rel="tag">Freeredis</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Loki/" rel="tag">Loki</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Powershell/" rel="tag">Powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Switch/" rel="tag">Switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">彙整</h3>
+      
+      
+        <a class="archive-link" href="/archives/2025/03 ">
+          三月 2025 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/06 ">
+          六月 2024 
+          <div class="archive-count">3 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/05 ">
+          五月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/03 ">
+          三月 2024 
+          <div class="archive-count">2 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2024/02 ">
+          二月 2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023/08 ">
+          八月 2023 
+          <div class="archive-count">14 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2025/03/30/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8%E8%A7%80%E5%BF%B5%E5%88%86%E4%BA%AB/" title="資訊安全觀念分享" >
+            <div class="recent-link-text">
+              資訊安全觀念分享
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/06/05/Kubernetes-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86/" title="Kubernetes 常用指令集" >
+            <div class="recent-link-text">
+              Kubernetes 常用指令集
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/06/02/Kubernetes-%E5%BB%BA%E7%AB%8BPod/" title="Kubernetes 建立Pod" >
+            <div class="recent-link-text">
+              Kubernetes 建立Pod
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/" title="Kubernetes 安裝與 Cluster建立" >
+            <div class="recent-link-text">
+              Kubernetes 安裝與 Cluster建立
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2024/05/28/WhisperX%EF%BC%9A%E6%96%87%E5%AD%97-%E8%AA%9E%E9%9F%B3-%E8%AD%98%E5%88%A5%E8%BD%89%E6%8F%9B/" title="WhisperX：文字/語音 識別轉換" >
+            <div class="recent-link-text">
+              WhisperX：文字/語音 識別轉換
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+      
+
+  <article id="post-資訊安全觀念分享" class="h-entry article article-type-post"
+    itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    
+      
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img" rel="gallery_cm8ved7dg003eq4v4d8557q0w">
+        <img src="/covers/stelliva42_Cyber_security_Hacker_mutiple_screen_AR_95b7c789-5a7b-4bcf-b77b-f5a4e4cbfe04.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+        
+          <div class="article-inner">
+            <div class="article-main">
+              <header class="article-header">
+                
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        資訊安全觀念分享
+      </h1>
+    
+  
+</div>
+
+                  <div class='meta-info-bar'>
+                    <div class="meta-info">
+  <time class="dt-published" datetime="2025-03-30T06:26:42.000Z" itemprop="datePublished">2025-03-30</time>
+</div>
+                      <div class="need-seperator meta-info">
+                        <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Information/">Information</a>
+   
+</div>
+
+                      </div>
+                      <div class="wordcount need-seperator meta-info">
+                        2.1k 詞
+                      </div>
+                  </div>
+                  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cyber-Security/" rel="tag">Cyber Security</a></li></ul>
+
+              </header>
+              <div class="e-content article-entry" itemprop="articleBody">
+                
+                        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>隨著物聯網與穿戴裝置聯網的需求與普及，雖然帶來了許多便利性，卻也間接的讓資訊安全 <strong>(Cyber Security)</strong> 被逐漸放大重視。<br>以往可以看到長輩在 <code>街道</code>、<code>公園等地</code>、<code>泡茶閒聊</code>、<code>下棋</code>，逐漸變成看手機，分享短影音，拍攝短影音。</p>
+<p>我們似乎不得不開始讓大家除了實體安全的詐騙、勒索改變成資訊安全，網路安全的注意。</p>
+<h3 id="因此有感而發的覺得似乎要跟大家聊聊這件事情-´･-･"><a href="#因此有感而發的覺得似乎要跟大家聊聊這件事情-´･-･" class="headerlink" title="因此有感而發的覺得似乎要跟大家聊聊這件事情(´･_･&#96;)"></a>因此有感而發的覺得似乎要跟大家聊聊這件事情(´･_･&#96;)</h3><hr>
+<h1 id="資訊安全：網路世代所有人都必修的一堂課-你的個資比你想像中更重要"><a href="#資訊安全：網路世代所有人都必修的一堂課-你的個資比你想像中更重要" class="headerlink" title="資訊安全：網路世代所有人都必修的一堂課 你的個資比你想像中更重要"></a>資訊安全：網路世代所有人都必修的一堂課 你的個資比你想像中更重要</h1><p>比方幾年前，突然手機跳出一條簡訊：「政府發放$6000。」，結合當時的時空背景與政策之下，想必有許多人不疑有他的點擊連結。<br><img src="https://ws.kinmen.gov.tw/001/Upload/302/relpic/13367/730025/d844d6fb-a40f-4910-897b-a1f1cd8fb450@710x470.jpg" alt="Imgur"></p>
+<h5 id="來源：金門縣政府全球資訊網"><a href="#來源：金門縣政府全球資訊網" class="headerlink" title="來源：金門縣政府全球資訊網"></a>來源：金門縣政府全球資訊網</h5><p>以上實際案例，就是資訊安全 <strong>（Cybersecurity）</strong> 問題最典型的情況。駭客並不會特別挑選攻擊對象，無論你是學生、上班族，甚至是企業高階主管，只要你的個人資料 <strong>（personal data）</strong> 具有價值，都可能成為駭客的目標。他們會使用各種社交工程 <strong>（social engineering）</strong> 技巧，例如釣魚網站 <strong>（phishing websites）</strong> 、惡意簡訊連結、惡意軟體（malware）等方式，竊取你的社交帳號、遊戲紀錄，甚至追蹤你的生活習慣，再進一步進行詐騙或販賣。</p>
+<hr>
+<h1 id="企業資安漏洞-絕對不可忽視的風險"><a href="#企業資安漏洞-絕對不可忽視的風險" class="headerlink" title="企業資安漏洞　絕對不可忽視的風險"></a>企業資安漏洞　絕對不可忽視的風險</h1><p>資訊安全問題不僅影響個人，對企業而言更可能造成巨大的災難。企業擁有大量敏感資訊，一旦資料外洩，後果往往非常嚴重。如果駭客能輕易地攻擊個人帳戶，那麼入侵企業的資料庫、財務系統或機密文件將變得更加容易。</p>
+<p>許多人認為只有大公司才會遭到駭客攻擊，但事實上，只要存在漏洞，都可能被駭客盯上。曾經有知名企業因為遭受勒索病毒（ransomware）攻擊，導致重要資料被加密鎖定，駭客索取高額贖金。即使企業的 IT 團隊全力搶救，部分資料仍然遭到外洩，甚至在暗網（dark web）被販售。</p>
+<p>不只企業，許多個人也只因為不小心點擊陌生的連結，導致手機被植入惡意軟體，進而引發銀行帳戶盜刷、個資濫用，甚至遭冒名申請貸款。駭客採取的是無差別攻擊，因此唯有保持警覺，才能避免成為受害者。</p>
+<h3 id="Bonus"><a href="#Bonus" class="headerlink" title="Bonus"></a>Bonus</h3><p>您也可以透過著名網站 <a target="_blank" rel="noopener" href="https://haveibeenpwned.com/"><code>「&#39;;--have i been pwned?」</code></a> 來查看一下自己的信箱資訊是否有洩漏，收集了在近幾年來被駭客所竊取以及公佈在網站上的用戶資料，其中包括Facebook、Adobe、Android Forums、Avast、LinkedIn等知名平台，讓用戶可以用很簡單的方法，就可以確認自己的個資是否遭到外流。</p>
+<h5 id="輸入你的信箱"><a href="#輸入你的信箱" class="headerlink" title="輸入你的信箱"></a>輸入你的信箱</h5><p><img src="https://imgur.com/zxYRiB3.png" alt="Imgur"></p>
+<h5 id="如果是紅色就代表你的信箱資訊外洩過"><a href="#如果是紅色就代表你的信箱資訊外洩過" class="headerlink" title="如果是紅色就代表你的信箱資訊外洩過"></a>如果是紅色就代表你的信箱資訊外洩過</h5><p><img src="https://imgur.com/Yv4IUPF.png" alt="Imgur"></p>
+<h5 id="也會跟你說從哪裡洩露-洩漏了些什麼"><a href="#也會跟你說從哪裡洩露-洩漏了些什麼" class="headerlink" title="也會跟你說從哪裡洩露 洩漏了些什麼"></a>也會跟你說從哪裡洩露 洩漏了些什麼</h5><p><img src="https://imgur.com/xdgqY1q.png" alt="Imgur"><br>嘿對，我的信箱資訊洩漏了 ( ˘•ω•˘ )</p>
+<p>難過的事就先談到這，我們繼續往下講講(っ´ω&#96;c)</p>
+<hr>
+<h1 id="駭客攻擊手法多樣，防不勝防-🐱‍💻"><a href="#駭客攻擊手法多樣，防不勝防-🐱‍💻" class="headerlink" title="駭客攻擊手法多樣，防不勝防 🐱‍💻"></a>駭客攻擊手法多樣，防不勝防 🐱‍💻</h1><p>除了常見的釣魚攻擊和勒索病毒之外，駭客還可能透過其他方式入侵裝置，例如偽造公共 Wi-Fi 熱點來竊取個資。此外，使用來路不明的 USB 隨身碟也需小心，一旦插入帶有惡意程式的裝置，可能會導致資料外洩。</p>
+<p>同時，在社群媒體上過度分享個人資訊也可能使你成為駭客的攻擊目標。駭客經常利用公開的資訊，例如生日、學歷、興趣甚至居住地點，進行針對性的詐騙或攻擊。</p>
+<h4 id="從IT專業角度觀察，目前企業普遍存在以下資安管理盲點："><a href="#從IT專業角度觀察，目前企業普遍存在以下資安管理盲點：" class="headerlink" title="從IT專業角度觀察，目前企業普遍存在以下資安管理盲點："></a>從IT專業角度觀察，目前企業普遍存在以下資安管理盲點：</h4><dl>
+    <dt>帳號權限控管不足：</dt>
+    <dd>未妥善管理特權帳號，導致帳號被盜用或濫用時難以追蹤。</dd>
+</dl>
+<dl>
+    <dt>監控系統不完善：</dt>
+    <dd>多數企業僅進行基本日誌記錄，無法即時偵測與處理異常事件。</dd>
+</dl>
+<dl>
+    <dt>缺乏自動化防護措施：</dt>
+    <dd>仍仰賴人工處理資安事件，無法有效抵禦持續且高度針對性的攻擊。</dd>
+</dl>
+
+<hr>
+<h1 id="如何有效強化資安防護？-🛡️"><a href="#如何有效強化資安防護？-🛡️" class="headerlink" title="如何有效強化資安防護？ 🛡️"></a>如何有效強化資安防護？ 🛡️</h1><p>企業必須建立「防患於未然」的觀念，落實以下具體措施：</p>
+<dl>
+    <dt>帳號與權限嚴格管理：</dt>
+    <dd>明確設定每個帳號的存取權限，特別是重要的特權帳號，必要時透過多重身份驗證機制，提升安全性。</dd>
+</dl>
+<dl>
+    <dt>即時監控與異常行為分析：</dt>
+    <dd>建構即時監控系統，迅速識別並回應可疑活動，當發現異常行為時能立即發出警示通知。</dd>
+</dl>
+<dl>
+    <dt>資料備份與災難回復計畫：</dt>
+    <dd>定期備份重要資料，並完整記錄每筆資料的存取和操作，以便事故發生後快速恢復業務運作。</dd>
+</dl>
+事實上，許多企業已逐步導入多層次的資安防護架構，如結合多重身份驗證、完整的操作紀錄審核及即時的異常行為警報機制，全面提升防禦能力，有效防範資料遭受駭客攻擊。
+
+<hr>
+<h1 id="強化資安意識，捍衛企業未來-💪"><a href="#強化資安意識，捍衛企業未來-💪" class="headerlink" title="強化資安意識，捍衛企業未來 💪"></a>強化資安意識，捍衛企業未來 💪</h1><p>資訊安全已成為全球企業必須重視的核心議題。作為IT專業人士，建議企業採取以下步驟強化資安防護：</p>
+<ul>
+<li>進行資安風險評估：定期評估並找出系統弱點。</li>
+<li>落實嚴格帳號控管與即時監控：加強權限管理與可疑行為追蹤。</li>
+<li>制定資料備份與回復計畫：確保在事故發生時迅速恢復。</li>
+<li>導入專業資安工具：以全面提升防護能力。</li>
+</ul>
+<p>投資資安並非額外成本，而是確保企業永續經營的重要基礎。企業唯有積極規劃與執行，才能在資安威脅日益嚴峻的環境中，穩固自身競爭力，保障長遠發展。</p>
+<hr>
+<h1 id="駭客攻擊手法多樣防不勝防-🐱‍💻"><a href="#駭客攻擊手法多樣防不勝防-🐱‍💻" class="headerlink" title="駭客攻擊手法多樣防不勝防 🐱‍💻"></a>駭客攻擊手法多樣防不勝防 🐱‍💻</h1><p>在了解駭客會如何進攻之後，接下來便是要尋找防守之道，市面上有許多針對資安防護的工具，例如，CyberArk、IBM Guardium以及近期資安市場上的新寵兒－ <code>DBSAFER</code>。</p>
+<p><strong>DBSAFER</strong> 最主要的功能以及資安防護工具，有：</p>
+<dl>
+    <dt>多重身份驗證（Multi-Factor Authentication, MFA）：</dt>
+    <dd>利用多重身份認證程序，有效防止未經授權的人員進入。</dd>
+</dl>
+<dl>
+    <dt>完整操作紀錄審核（Audit Trail）：</dt>
+    <dd>完整紀錄每一筆資料的存取與操作，以便於日後追蹤查核。</dd>
+</dl>
+<dl>
+    <dt>異常行為即時警報（Anomaly Behavior Alert）：</dt>
+    <dd>在運作的過程中，若偵測到不正常的資料存取或登入行為時，將會立即發出警示，通知管理人員進行處理。</dd>
+</dl>
+
+<p>在防護功能上，DBSAFER完全不遜色於其他大廠的防護工具，而且由於是新興產品，因此在售價、服務品質上，將更具競爭力，預估未來有可能會是<code>預算較低</code>的中小企業主的最愛。</p>
+<hr>
+<h1 id="資訊安全-從個人到企業的全面防護-🙋‍♂️"><a href="#資訊安全-從個人到企業的全面防護-🙋‍♂️" class="headerlink" title="資訊安全　從個人到企業的全面防護 🙋‍♂️"></a>資訊安全　從個人到企業的全面防護 🙋‍♂️</h1><p>前面講的一段關於企業該怎麼做，那身而為一個活在充滿科技創新與便捷的時代，資訊安全不再只是專業人員的責任，而是每個人每天都必須關注的議題。</p>
+<h4 id="個人該如何做好資安防護？"><a href="#個人該如何做好資安防護？" class="headerlink" title="個人該如何做好資安防護？"></a>個人該如何做好資安防護？</h4><ul>
+<li>不點擊陌生的連結或附件</li>
+<li>使用複雜且難以猜測的密碼，並開啟雙重驗證（2FA）</li>
+<li>定期更新系統及應用程式，以修補漏洞</li>
+<li>使用加密通訊軟體，保護個人隱私</li>
+<li>謹慎使用公共 Wi-Fi，必要時使用 VPN 來保護資料</li>
+</ul>
+<p>從現在開始，認真看待資訊安全，保護自己免於成為駭客攻擊的下一個受害者吧(　˙灬˙　)</p>
+
+                          
+              </div>
+
+              
+            </div>
+
+            
+          </div>
+          
+            
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/06/05/Kubernetes-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86/"
+      title="Kubernetes 常用指令集"
+     >
+
+    <p class="title-text">
+      
+        Kubernetes 常用指令集
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+              
+  </article>
+
+  
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2025 Luca Yao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.style.opacity = 1;
+        } else {
+            btn.style.opacity = 0;
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
