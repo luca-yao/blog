@@ -11,15 +11,6 @@
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/2024/06/05/Kubernetes-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86/</loc>
-    
-    <lastmod>2024-06-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://luca-yao-s-blog.web.app/2024/06/02/Kubernetes-%E5%AE%89%E8%A3%9D%E8%88%87-Cluster%E5%BB%BA%E7%AB%8B/</loc>
     
     <lastmod>2024-06-04</lastmod>
@@ -290,14 +281,14 @@
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Switch/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
     <lastmod>2025-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/tags/Python/</loc>
+    <loc>https://luca-yao-s-blog.web.app/tags/Switch/</loc>
     <lastmod>2025-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -390,14 +381,14 @@
 
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
+    <loc>https://luca-yao-s-blog.web.app/categories/Coding/</loc>
     <lastmod>2025-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://luca-yao-s-blog.web.app/categories/Coding/</loc>
+    <loc>https://luca-yao-s-blog.web.app/categories/Device/</loc>
     <lastmod>2025-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
